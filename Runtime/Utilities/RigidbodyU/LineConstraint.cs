@@ -4,7 +4,7 @@ using UnityExtended.Extensions;
 namespace UnityExtended.Utilities.RigidbodyU {
     [RequireComponent(typeof(Rigidbody))]
     /// <summary>
-    /// Component that allows to restrict rigidbody movement to the line betweeb two points.
+    /// Component that restricts rigidbody movement to the line between two points.
     /// </summary>
     public class LineConstraint : MonoBehaviour {
         private const float DebugSpheresRadius = 0.1f;
