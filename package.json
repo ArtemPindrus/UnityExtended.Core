@@ -1,0 +1,10 @@
+{
+  "name": "com.artempindrus.unityextended",
+  "version": "1.0.0",
+  "displayName": "UnityExtended",
+  "description": "Provides useful extensions and utilities to use in Unity.",
+  "author": {
+    "name": "Artem Pindrus",
+    "email": "artempindrus@gmail.com"
+  }
+}
