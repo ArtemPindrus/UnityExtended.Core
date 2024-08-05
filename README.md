@@ -4,4 +4,4 @@ Made for personal use and expanded to public, so don't expect any support, but d
 
 Use it for anything. Commercial use as well. No credits required.
 
-The code is thoroughly documented. If you wonder what any method does - just read the summary on the definition.
+The code is thoroughly documented. If you wonder what any method or utility does - just read the summary on the definition.
