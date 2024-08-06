@@ -17,9 +17,9 @@ namespace UnityExtended.Extensions {
         public static Vector3 With(this Vector3 v, float x = float.NaN, float y = float.NaN, float z = float.NaN) {
             Vector3 result = v;
             
-            if (float.IsNaN(x)) result.x = x;
-            if (float.IsNaN(y)) result.y = y;
-            if (float.IsNaN(z)) result.z = z;
+            if (!float.IsNaN(x)) result.x = x;
+            if (!float.IsNaN(y)) result.y = y;
+            if (!float.IsNaN(z)) result.z = z;
 
             return result;
         }
