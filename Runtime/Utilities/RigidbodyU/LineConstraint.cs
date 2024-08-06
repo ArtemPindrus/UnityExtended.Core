@@ -61,6 +61,9 @@ CHANGING VALUE REQUIRES RELOAD.")]
             }
         }
 
+        /// <summary>
+        /// Align current position of the rigidbody to be along the line constraint.
+        /// </summary>
         private void AllignPosition() {
             Vector3 firstToBody = transform.position - firstPoint;
             Vector3 aligned = firstToBody.ProjectClamped(FirstToSecond);
@@ -84,13 +87,14 @@ CHANGING VALUE REQUIRES RELOAD.")]
             rb.velocity = projectedVelocity;
         }
 
+        /// <summary>
+        /// Alligning position and velocity again AFTER PhysX simulation.
+        /// <para>Ensures that the object is at the right position before render.</para>
+        /// </summary>
         private void AfterPhysics() {
-            // Alligning position and velocity again AFTER PhysX simulation.
-            // Ensures that the object is at the right position before render.
-
-            AllignPosition();
             AllignRestrictVelocity();
 
+            // Intercept movement made by physics simulation and instead move the body along the line constraint.
             Vector3 targetPoint = lastAllignedPosition + rb.velocity * Time.fixedDeltaTime;
             transform.position = targetPoint;
         }
