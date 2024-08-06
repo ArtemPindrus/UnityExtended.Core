@@ -46,10 +46,55 @@ CHANGING VALUE REQUIRES RELOAD.")]
         }
 
         private void FixedUpdate() {
-            // Alligning position and velocity before any forces are applied by PhysX. Makes physics simulation itself accurate.
+            // Aligning position and velocity before any forces are applied by PhysX. Makes physics simulation itself accurate.
 
-            AllignPosition();
-            AllignRestrictVelocity();
+            AlignPosition();
+            AlignRestrictVelocity();
+        }
+
+        /// <summary>
+        /// Align current position of the rigidbody to be along the line constraint.
+        /// </summary>
+        private void AlignPosition(bool useTransformInstead = false) {
+            Vector3 firstToBody = transform.position - firstPoint;
+            Vector3 aligned = firstToBody.ProjectClamped(FirstToSecond);
+
+            Vector3 target = firstPoint + aligned;
+
+            if (!useTransformInstead) rb.position = target;
+            else transform.position = target;
+
+            lastAllignedPosition = rb.position;
+        }
+
+        private void AlignRestrictVelocity() {
+            Vector3 currentPosition = rb.position;
+            Vector3 projectedVelocity = Vector3.Project(rb.velocity, FirstToSecondDir);
+            Vector3 projectedDirection = projectedVelocity.normalized;
+
+            if (currentPosition == firstPoint && projectedDirection == -FirstToSecondDir) {
+                projectedVelocity = Vector3.zero;
+                Debug.Break();
+            } else if (currentPosition == secondPoint && projectedDirection == FirstToSecondDir) {
+                projectedVelocity = Vector3.zero;
+            }
+
+            rb.velocity = projectedVelocity;
+        }
+
+        /// <summary>
+        /// Aligning position and velocity again AFTER PhysX simulation.
+        /// <para>Ensures that the object is at the right position before render.</para>
+        /// </summary>
+        private void AfterPhysics() {
+            AlignRestrictVelocity();
+
+            // Intercept movement made by physics simulation and instead move the body along the line constraint.
+            Vector3 targetPoint = lastAllignedPosition + rb.velocity * Time.fixedDeltaTime;
+            rb.position = targetPoint;
+
+            // Align new position (overshot may happen on previous movement)
+            AlignPosition(true);
         }
 
         private void OnDrawGizmos() {
@@ -59,44 +104,6 @@ CHANGING VALUE REQUIRES RELOAD.")]
 
                 Debug.DrawLine(firstPoint, secondPoint);
             }
-        }
-
-        /// <summary>
-        /// Align current position of the rigidbody to be along the line constraint.
-        /// </summary>
-        private void AllignPosition() {
-            Vector3 firstToBody = transform.position - firstPoint;
-            Vector3 aligned = firstToBody.ProjectClamped(FirstToSecond);
-
-            rb.position = firstPoint + aligned;
-
-            lastAllignedPosition = rb.position;
-        }
-
-        private void AllignRestrictVelocity() {
-            Vector3 currentPosition = rb.position;
-            Vector3 projectedVelocity = Vector3.Project(rb.velocity, FirstToSecondDir);
-            Vector3 projectedDirection = projectedVelocity.normalized;
-
-            if (currentPosition == firstPoint && projectedDirection == -FirstToSecondDir) {
-                projectedVelocity = Vector3.zero;
-            } else if (currentPosition == secondPoint && projectedDirection == FirstToSecondDir) {
-                projectedVelocity = Vector3.zero;
-            }
-
-            rb.velocity = projectedVelocity;
-        }
-
-        /// <summary>
-        /// Alligning position and velocity again AFTER PhysX simulation.
-        /// <para>Ensures that the object is at the right position before render.</para>
-        /// </summary>
-        private void AfterPhysics() {
-            AllignRestrictVelocity();
-
-            // Intercept movement made by physics simulation and instead move the body along the line constraint.
-            Vector3 targetPoint = lastAllignedPosition + rb.velocity * Time.fixedDeltaTime;
-            transform.position = targetPoint;
         }
     }
 }
