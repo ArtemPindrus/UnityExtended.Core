@@ -12,12 +12,19 @@ namespace UnityExtended.Utilities.RigidbodyU {
         [SerializeField]
         [Tooltip("Visualize two endpoints and the line between them.")]
         private bool debug;
+        [Tooltip(@"Whether to perform second iteration (RECOMMENDED ON).
+Normally component alligns both position and velocity BEFORE the physics simulation. With this bool set to true it repeats the process AFTER physics simulation.
+Produces more accurate results, obviously at the cost of performance (really little overhead).
+CHANGING VALUE REQUIRES RELOAD.")]
+        [SerializeField]
+        private bool performSecondIteration = true;
         [SerializeField]
         private Vector3 firstPoint;
         [SerializeField]
         private Vector3 secondPoint;
 
         private Rigidbody rb;
+        private Vector3 lastAllignedPosition;
 
         /// <summary>
         /// Gets a vector pointing from <see cref="firstPoint"/> to the <see cref="secondPoint"/>.
@@ -34,11 +41,15 @@ namespace UnityExtended.Utilities.RigidbodyU {
 
             FirstToSecond = secondPoint - firstPoint;
             FirstToSecondDir = FirstToSecond.normalized;
+
+            if (performSecondIteration) this.InvokePostPhysicsUpdate(AfterPhysics);
         }
 
         private void FixedUpdate() {
+            // Alligning position and velocity before any forces are applied by PhysX. Makes physics simulation itself accurate.
+
             AllignPosition();
-            RestrictVelocity();
+            AllignRestrictVelocity();
         }
 
         private void OnDrawGizmos() {
@@ -55,9 +66,11 @@ namespace UnityExtended.Utilities.RigidbodyU {
             Vector3 aligned = firstToBody.ProjectClamped(FirstToSecond);
 
             rb.position = firstPoint + aligned;
+
+            lastAllignedPosition = rb.position;
         }
 
-        private void RestrictVelocity() {
+        private void AllignRestrictVelocity() {
             Vector3 currentPosition = rb.position;
             Vector3 projectedVelocity = Vector3.Project(rb.velocity, FirstToSecondDir);
             Vector3 projectedDirection = projectedVelocity.normalized;
@@ -69,6 +82,17 @@ namespace UnityExtended.Utilities.RigidbodyU {
             }
 
             rb.velocity = projectedVelocity;
+        }
+
+        private void AfterPhysics() {
+            // Alligning position and velocity again AFTER PhysX simulation.
+            // Ensures that the object is at the right position before render.
+
+            AllignPosition();
+            AllignRestrictVelocity();
+
+            Vector3 targetPoint = lastAllignedPosition + rb.velocity * Time.fixedDeltaTime;
+            transform.position = targetPoint;
         }
     }
 }
