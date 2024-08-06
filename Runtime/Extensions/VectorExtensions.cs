@@ -76,5 +76,18 @@ namespace UnityExtended.Extensions {
 
             return direction * scalar;
         }
+
+        /// <summary>
+        /// Logs vector with accurate components values.
+        /// <para>Normally Debug.Log() logs vector with components truncated to nearest hundredth. 
+        /// Meaning that a vector with components {x = 1.00012, y = 0.01001, z = 10.10203} 
+        /// will be logged as (1.00, 0.01, 10.10) which is annoying when you need accurate values.</para>
+        /// <para>Logs message in "<paramref name="prefix"/>: (<paramref name="v"/>.x, <paramref name="v"/>.y, <paramref name="v"/>.z)" format.</para>
+        /// </summary>
+        /// <param name="v"><see cref="Vector3"/> to log.</param>
+        /// <param name="prefix">Prefix before logged values.</param>
+        public static void LogAccurate(this Vector3 v, string prefix) {
+            Debug.Log($"{prefix}: ({v.x}, {v.y}, {v.z})");
+        }
     }
 }
