@@ -31,5 +31,22 @@ namespace UnityExtended.Utilities {
 
             return predicted;
         }
+
+        /// <summary>
+        /// Makes Unity consistently invoke supplied function after physics update (technically after all the OnCollisionXXX messages). 
+        /// </summary>
+        /// <param name="monoBehaviour"><see cref="MonoBehaviour"/> to which a coroutine will be attached.</param>
+        /// <param name="function">Invoked function.</param>
+        public static void InvokePostPhysicsUpdate(this MonoBehaviour monoBehaviour, Action function) {
+            monoBehaviour.StartCoroutine(Impl(function));
+
+            static IEnumerator Impl(Action function) {
+                while (true) {
+                    yield return new WaitForFixedUpdate();
+
+                    function();
+                }
+            }
+        }
     }
 }
