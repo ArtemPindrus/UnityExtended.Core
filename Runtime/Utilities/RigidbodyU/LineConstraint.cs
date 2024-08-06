@@ -59,7 +59,7 @@ namespace UnityExtended.Utilities.RigidbodyU {
 
         private void RestrictVelocity() {
             Vector3 currentPosition = rb.position;
-            Vector3 projectedVelocity = Vector3.Project(rb.velocity, FirstToSecond);
+            Vector3 projectedVelocity = Vector3.Project(rb.velocity, FirstToSecondDir);
             Vector3 projectedDirection = projectedVelocity.normalized;
 
             if (currentPosition == firstPoint && projectedDirection == -FirstToSecondDir) {
