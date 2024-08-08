@@ -37,6 +37,28 @@ namespace UnityExtended.Utilities {
         }
 
         /// <summary>
+        /// Predicts <see cref="Rigidbody"/>'s angular velocity on the next physics update after application of accumulated forces, 
+        /// but before collision and friction forces.
+        /// <para>Intended to be used before internal physics update (on FixedUpdate).</para>
+        /// <para>As <see cref="PredictAccumulatedLinearVelocity(Rigidbody, bool, bool)"/> provided exclusively correct results during testings.</para>
+        /// </summary>
+        /// <param name="rb"><see cref="Rigidbody"/>, angular velocity of which is calculated.</param>
+        /// <param name="accountDrag">Whether to account rigidbody's angular drag into calculations. Set to true for accuracy.</param>
+        /// <returns>Angular velocity of a rigidbody right after application of accumulated forces in the internal physics update.</returns>
+        public static Vector3 PredictAccumulatedAngularVelocity(Rigidbody rb, bool accountDrag = true) {
+            Vector3 angularAcceleration = CalculateAngularAcceleration(rb, rb.GetAccumulatedTorque());
+
+            Vector3 predicted = rb.angularVelocity + angularAcceleration * Time.fixedDeltaTime;
+
+            if (accountDrag) {
+                float dragMultiplier = Mathf.Clamp01(1 - rb.angularDrag * Time.fixedDeltaTime);
+                predicted *= dragMultiplier;
+            }
+
+            return predicted;
+        }
+
+        /// <summary>
         /// Makes Unity consistently invoke supplied function after physics update (technically after all the OnCollisionXXX messages). 
         /// </summary>
         /// <param name="monoBehaviour"><see cref="MonoBehaviour"/> to which a coroutine will be attached.</param>
