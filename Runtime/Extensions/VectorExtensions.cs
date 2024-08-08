@@ -90,6 +90,12 @@ namespace UnityExtended.Extensions {
             Debug.Log($"{prefix}: ({v.x}, {v.y}, {v.z})");
         }
 
+        /// <summary>
+        /// Divides <see cref="Vector3"/> components component-wise.
+        /// </summary>
+        /// <param name="divident"><see cref="Vector3"/>, components of which is getting diveded.</param>
+        /// <param name="divisor"><see cref="Vector3"/> that the other is divided by.</param>
+        /// <returns><paramref name="divident"/> with components divided by <paramref name="divisor"/> respectful components.</returns>
         public static Vector3 Divide(this Vector3 divident, Vector3 divisor) {
             return new Vector3(divident.x / divisor.x, divident.y / divisor.y, divident.z / divisor.z);
         }

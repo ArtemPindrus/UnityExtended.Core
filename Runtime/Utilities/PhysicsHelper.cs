@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityExtended.Extensions;
 
 namespace UnityExtended.Utilities {
     public static class PhysicsHelper {
@@ -73,6 +74,18 @@ namespace UnityExtended.Utilities {
                     function();
                 }
             }
+        }
+
+        /// <summary>
+        /// Converts torque into angular acceleration for a specific <see cref="Rigidbody"/>. 
+        /// </summary>
+        /// <param name="rb"><see cref="Rigidbody"/> to which the torque is applied to.</param>
+        /// <param name="torque">Applied torque.</param>
+        /// <returns><see cref="Vector3"/> representing angular acceleration calculated from a <paramref name="torque"/> for a given <paramref name="rb"/></returns>
+        public static Vector3 CalculateAngularAcceleration(Rigidbody rb, Vector3 torque) {
+            Vector3 worldInertiaTensor = rb.inertiaTensorRotation * rb.inertiaTensor;
+
+            return torque.Divide(worldInertiaTensor);
         }
     }
 }
