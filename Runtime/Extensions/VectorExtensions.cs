@@ -89,5 +89,9 @@ namespace UnityExtended.Extensions {
         public static void LogAccurate(this Vector3 v, string prefix) {
             Debug.Log($"{prefix}: ({v.x}, {v.y}, {v.z})");
         }
+
+        public static Vector3 Divide(this Vector3 divident, Vector3 divisor) {
+            return new Vector3(divident.x / divisor.x, divident.y / divisor.y, divident.z / divisor.z);
+        }
     }
 }
