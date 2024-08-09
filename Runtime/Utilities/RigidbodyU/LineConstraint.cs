@@ -74,7 +74,6 @@ CHANGING VALUE REQUIRES RELOAD.")]
 
             if (currentPosition == firstPoint && projectedDirection == -FirstToSecondDir) {
                 projectedVelocity = Vector3.zero;
-                Debug.Break();
             } else if (currentPosition == secondPoint && projectedDirection == FirstToSecondDir) {
                 projectedVelocity = Vector3.zero;
             }
