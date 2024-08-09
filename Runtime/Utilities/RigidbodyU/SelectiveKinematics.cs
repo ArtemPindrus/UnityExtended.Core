@@ -57,7 +57,7 @@ Doesn't necessary reflect currently ignored Rigidbodies during runtime.")]
                     ModifiableMassProperties newProperties = new();
 
                     // Set inverse mass scale of ignoring Rigidbody to 0 and ignored to 1.
-                    // Results in impulse applied to the ignoring to be 0. The other RB will gain original impulse.
+                    // Results in impulse applied to the ignoring to be 0. The other RB will gain unchanged impulse.
                     if (contactPair.bodyInstanceID == thisRBID) newProperties.otherInverseMassScale = 1;
                     else newProperties.inverseMassScale = 1;
 
