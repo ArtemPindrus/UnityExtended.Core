@@ -42,9 +42,11 @@ Doesn't necessary reflect currently ignored Rigidbodies during runtime.")]
 
             Physics.ContactModifyEvent += IgnoreInvalidForces;
 
-            var initialIDs = initiallyIgnored.Select(x => x.GetHashCode());
+            if (initiallyIgnored != null) {
+                var initialIDs = initiallyIgnored.Select(x => x.GetHashCode());
 
-            foreach (var ID in initialIDs) ignoredIDs.Add(ID);
+                foreach (var ID in initialIDs) ignoredIDs.Add(ID);
+            }
         }
 
         /// <summary>
