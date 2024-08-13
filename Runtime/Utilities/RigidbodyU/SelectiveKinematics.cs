@@ -15,7 +15,7 @@ Doesn't necessary reflect currently ignored Rigidbodies during runtime.")]
         [SerializeField]
         private Rigidbody[] initiallyIgnored;
 
-        private List<int> ignoredIDs;
+        private HashSet<int> ignoredIDs;
 
         private Rigidbody thisRB;
         private int thisRBID;
@@ -41,7 +41,9 @@ Doesn't necessary reflect currently ignored Rigidbodies during runtime.")]
 
             Physics.ContactModifyEvent += IgnoreInvalidForces;
 
-            ignoredIDs.AddRange(initiallyIgnored.Select(x => x.GetHashCode()));
+            var initialIDs = initiallyIgnored.Select(x => x.GetHashCode());
+
+            foreach (var ID in initialIDs) ignoredIDs.Add(ID);
         }
 
         /// <summary>
