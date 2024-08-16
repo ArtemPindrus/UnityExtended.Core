@@ -79,5 +79,12 @@ Doesn't necessary reflect currently ignored Rigidbodies during runtime.")]
                 }
             }
         }
+
+        [ContextMenu(nameof(LogIgnoredIDs))]
+        private void LogIgnoredIDs() {
+            Debug.Log($"Ignored IDs ({name}):");
+
+            foreach (var id in ignoredIDs) Debug.Log(id);
+        }
     }
 }
