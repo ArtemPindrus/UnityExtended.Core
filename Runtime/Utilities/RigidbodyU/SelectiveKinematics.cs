@@ -58,6 +58,8 @@ Doesn't necessary reflect currently ignored Rigidbodies during runtime.")]
             for (int i = 0; i < contactPairs.Length; i++) {
                 ModifiableContactPair contactPair = contactPairs[i];
 
+                if (thisRBID != contactPair.bodyInstanceID && thisRBID != contactPair.otherBodyInstanceID) continue;
+
                 if (ignoredIDs.Contains(contactPair.bodyInstanceID) || ignoredIDs.Contains(contactPair.otherBodyInstanceID)) {
                     ModifiableMassProperties newProperties = new();
 
@@ -66,7 +68,7 @@ Doesn't necessary reflect currently ignored Rigidbodies during runtime.")]
                     if (contactPair.bodyInstanceID == thisRBID) {
                         newProperties.otherInverseMassScale = 1;
                         newProperties.otherInverseInertiaScale = 1;
-                    } else {
+                    } else if (contactPair.otherBodyInstanceID == thisRBID) {
                         newProperties.inverseMassScale = 1;
                         newProperties.inverseInertiaScale = 1;
                     }
