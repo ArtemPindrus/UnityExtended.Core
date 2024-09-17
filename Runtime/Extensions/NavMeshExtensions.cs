@@ -4,20 +4,27 @@ using UnityEngine.AI;
 
 namespace UnityExtended.Extensions {
     public static class NavMeshExtensions {
-        public static bool IsAtPos(this NavMeshAgent agent, Vector3 position, float destinationTolerance = 0, float remainingDistanceTolerance = 0) {
-            if (destinationTolerance < 0) throw new ArgumentException($"{destinationTolerance} shouln't be < 0");
-            if (remainingDistanceTolerance < 0) throw new ArgumentException($"{remainingDistanceTolerance} shouln't be < 0");
+        /// <summary>
+        /// Samples given position to the agent's navmesh and determines whether the agent achieved destination.
+        /// </summary>
+        /// <param name="agent">Agent.</param>
+        /// <param name="position">Position of destination. Will get sampled to the navmesh with agent's type.</param>
+        /// <param name="samplingDistance">Distance from the <paramref name="position"/> for the sampling.</param>
+        /// <param name="areaMask">A bitmask representing the traversable area types.</param>
+        /// <returns></returns>
+        public static bool IsAtDestination(this NavMeshAgent agent, Vector3 position, float samplingDistance = 5, int areaMask = -1) {
+            // sample point
+            NavMeshQueryFilter filter = new() { agentTypeID = agent.agentTypeID, areaMask = areaMask };
 
-            bool destinationValid;
-            bool remainingDistanceValid;
+            if (NavMesh.SamplePosition(position, out NavMeshHit hit, samplingDistance, filter)) {
+                Vector3 sampledPos = hit.position;
 
-            if (destinationTolerance == 0) destinationValid = agent.destination == position;
-            else destinationValid = Vector3.Distance(agent.destination, position) <= destinationTolerance;
+                if (agent.destination == sampledPos && agent.remainingDistance <= agent.stoppingDistance) {
+                    if (!agent.hasPath || agent.velocity.sqrMagnitude == 0) return true;
+                }
+            }
 
-            if (remainingDistanceTolerance == 0) remainingDistanceValid = agent.remainingDistance == 0;
-            else remainingDistanceValid = agent.remainingDistance <= destinationTolerance;
-
-            return destinationValid && remainingDistanceValid;
+            return false;
         }
     }
 }
