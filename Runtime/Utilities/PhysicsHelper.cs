@@ -21,7 +21,12 @@ namespace UnityExtended.Utilities {
 
             Vector3 accumulatedForce = rb.GetAccumulatedForce();
             Vector3 velocityDelta = accumulatedForce * fixedDT / rb.mass; // turn accumulated force into velocity delta
+
+#if UNITY_6000_0_OR_NEWER
+            Vector3 velocityPostApplication = rb.linearVelocity + velocityDelta;
+#elif UNITY_2022_3_OR_NEWER
             Vector3 velocityPostApplication = rb.velocity + velocityDelta;
+#endif
 
             if (accountGravity && rb.useGravity) { // gravity isn't an accumulated force so it's getting calculated separately in here
                 velocityPostApplication += Physics.gravity * fixedDT;
@@ -30,7 +35,11 @@ namespace UnityExtended.Utilities {
             Vector3 predicted = velocityPostApplication;
 
             if (accountDrag) {
+#if UNITY_6000_0_OR_NEWER
+                float dragMultiplier = Mathf.Clamp01(1 - rb.linearDamping * fixedDT); // people figured out the drag formula a while ago
+#elif UNITY_2022_3_OR_NEWER
                 float dragMultiplier = Mathf.Clamp01(1 - rb.drag * fixedDT); // people figured out the drag formula a while ago
+#endif
                 predicted *= dragMultiplier;
             }
 
@@ -52,7 +61,11 @@ namespace UnityExtended.Utilities {
             Vector3 predicted = rb.angularVelocity + angularAcceleration * Time.fixedDeltaTime;
 
             if (accountDrag) {
+#if UNITY_6000_0_OR_NEWER
+                float dragMultiplier = Mathf.Clamp01(1 - rb.angularDamping * Time.fixedDeltaTime);
+#elif UNITY_2022_3_OR_NEWER
                 float dragMultiplier = Mathf.Clamp01(1 - rb.angularDrag * Time.fixedDeltaTime);
+#endif
                 predicted *= dragMultiplier;
             }
 
