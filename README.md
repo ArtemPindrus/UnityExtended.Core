@@ -9,6 +9,7 @@ The code is thoroughly documented. If you wonder what any method or utility does
 # Supported versions:
 - Unity 2022.3
 - Unity 6+
+
 I haven't tested versions prior to 2022.3.
 
 Unity 6 presented some good API changes, so I try to accomodate to both APIs with conditional compilation, but if you encounter compilation errors on 2022.3, let me know.
