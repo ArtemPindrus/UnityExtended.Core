@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityExtended.Extensions;
+using UnityExtended.Core.Extensions;
 
-namespace UnityExtended.Utilities {
+namespace UnityExtended.Core.Utilities {
     public static class PhysicsHelper {
         /// <summary>
         /// Predicts linear velocity of a <see cref="Rigidbody"/> on the next physics update 

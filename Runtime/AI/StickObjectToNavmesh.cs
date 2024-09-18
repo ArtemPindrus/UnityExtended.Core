@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Assertions;
 
-namespace Assets.TestAI {
+namespace UnityExtended.AI.Utilities {
     /// <summary>
     /// In-editor tool to stick an object to specified <see cref="NavMeshSurface"/>.
     /// </summary>

@@ -3,7 +3,7 @@ using Unity.Collections;
 using UnityEngine;
 using System.Linq;
 
-namespace UnityExtended.Utilities.RigidbodyU {
+namespace UnityExtended.Core.Utilities.RBs {
     /// <summary>
     /// Component that makes a <see cref="Rigidbody"/> ignore action forces from specified Rigidbodies, while applying reaction forces to them.
     /// Makes a <see cref="Rigidbody"/> to produce kinematic behavior only for specific bodies.

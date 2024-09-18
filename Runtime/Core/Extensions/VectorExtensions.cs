@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityExtended.Extensions {
+namespace UnityExtended.Core.Extensions {
     /// <summary>
     /// Provides additional functionality to the <see cref="Vector3"/> class.
     /// </summary>

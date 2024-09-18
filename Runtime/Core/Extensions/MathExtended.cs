@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace UnityExtended.Extensions {
+namespace UnityExtended.Core.Extensions {
     public static class MathExtended {
         /// <summary>
         /// Just like Math.Sign() but returns 0 if the given value is zero.

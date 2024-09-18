@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace UnityExtended.Extensions {
+namespace UnityExtended.AI.Extensions {
     public static class NavMeshExtensions {
         /// <summary>
         /// Samples given position to the agent's navmesh and determines whether the agent achieved destination.

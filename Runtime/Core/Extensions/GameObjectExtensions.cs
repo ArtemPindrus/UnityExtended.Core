@@ -2,7 +2,7 @@
 using System.Reflection;
 using UnityEngine;
 
-namespace UnityExtended.Extensions {
+namespace UnityExtended.Core.Extensions {
     /// <summary>
     /// Provides extensions to manage <see cref="GameObject"/>s.
     /// </summary>
