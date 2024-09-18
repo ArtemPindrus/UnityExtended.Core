@@ -13,3 +13,9 @@ The code is thoroughly documented. If you wonder what any method or utility does
 I haven't tested versions prior to 2022.3.
 
 Unity 6 presented some good API changes, so I try to accommodate to both APIs with conditional compilation, but if you encounter compilation errors on 2022.3, let me know.
+
+# Modules
+- [UnityExtended.AI](https://github.com/ArtemPindrus/UnityExtended.AI/tree/main)
+
+# Installation
+Clone repository into desired folder inside Assets folder of your project. (the same applies for modules)
