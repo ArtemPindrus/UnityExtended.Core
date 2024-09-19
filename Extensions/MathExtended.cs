@@ -39,18 +39,16 @@ namespace UnityExtended.Core.Extensions {
             float clamped = value;
 
             if (value > max) {
-                float overflow = value - max;
+                float overflow = value % max;
 
-                clamped = min + overflow;
+                clamped = overflow == 0 ? max : min + overflow;
             } else if (value < min) {
-                float overflow = value - min;
+                float overflow = value % min;
 
-                clamped = max + overflow;
+                clamped = overflow == 0 ? min : max + overflow;
             }
 
-            bool overflowed = clamped < min || clamped > max;
-
-            return overflowed ? RangeOverflow(clamped, min, max) : clamped;
+            return clamped;
         }
     }
 }
