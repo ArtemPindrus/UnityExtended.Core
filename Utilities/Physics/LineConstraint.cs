@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityExtended.Core.Extensions;
 
-namespace UnityExtended.Core.Utilities.RBs {
+namespace UnityExtended.Core.Utilities.Physics {
     [RequireComponent(typeof(Rigidbody))]
     /// <summary>
     /// Component that restricts rigidbody movement to the line between two points.

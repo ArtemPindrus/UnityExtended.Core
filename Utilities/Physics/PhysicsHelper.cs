@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityExtended.Core.Extensions;
 
-namespace UnityExtended.Core.Utilities {
+namespace UnityExtended.Core.Utilities.Physics {
     public static class PhysicsHelper {
         /// <summary>
         /// Predicts linear velocity of a <see cref="Rigidbody"/> on the next physics update 
@@ -29,7 +29,7 @@ namespace UnityExtended.Core.Utilities {
 #endif
 
             if (accountGravity && rb.useGravity) { // gravity isn't an accumulated force so it's getting calculated separately in here
-                velocityPostApplication += Physics.gravity * fixedDT;
+                velocityPostApplication += UnityEngine.Physics.gravity * fixedDT;
             }
 
             Vector3 predicted = velocityPostApplication;

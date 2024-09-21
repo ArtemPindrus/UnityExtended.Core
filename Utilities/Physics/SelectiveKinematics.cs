@@ -3,7 +3,7 @@ using Unity.Collections;
 using UnityEngine;
 using System.Linq;
 
-namespace UnityExtended.Core.Utilities.RBs {
+namespace UnityExtended.Core.Utilities.Physics {
     /// <summary>
     /// Component that makes a <see cref="Rigidbody"/> ignore action forces from specified Rigidbodies, while applying reaction forces to them.
     /// Makes a <see cref="Rigidbody"/> to produce kinematic behavior only for specific bodies.
@@ -40,7 +40,7 @@ Doesn't necessary reflect currently ignored Rigidbodies during runtime.")]
                 collider.hasModifiableContacts = true;
             }
 
-            Physics.ContactModifyEvent += IgnoreInvalidForces;
+            UnityEngine.Physics.ContactModifyEvent += IgnoreInvalidForces;
 
             if (initiallyIgnored != null) {
                 var initialIDs = initiallyIgnored.Select(x => x.GetHashCode());
