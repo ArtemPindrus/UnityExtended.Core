@@ -32,10 +32,12 @@ namespace UnityExtended.Core.Utilities {
                  "HINT: VelocityDelta = impulse / mass OR impulse * inverseMass. (so the less the inverseMass the less the resulting VelocityDelta)")]
         [Tooltip("When interacting with Affected Rigidbodies what's the inverse mass scale of THIS body (the body with the script attached).")]
         [SerializeField]
+        [Min(0)]
         private float thisRBScaler = 1f;
 
         [Tooltip("When interacting with Affected Rigidbodies what's the inverse mass scale of other Rigidbody (the Rigidbody this body with the script collided).")]
         [SerializeField]
+        [Min(0)]
         private float othersRBScaler = 1f;
 
 #nullable enable
