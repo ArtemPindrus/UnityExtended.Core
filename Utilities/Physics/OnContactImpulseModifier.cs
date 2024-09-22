@@ -51,7 +51,7 @@ namespace UnityExtended.Core.Utilities {
         /// <returns>Whether succeeded attaching component.</returns>
         public static bool Attach(GameObject gameObject, Dictionary<int, Rigidbody> affectedIDsToRBs, float thisRBScaler, float othersRBScaler, out OnContactImpulseModifier component) {
             if (gameObject.TryGetComponent<OnContactImpulseModifier>(out _)) {
-                component = null;
+                component = null!; // ignore. User should check for bool before accessing created component.
 
                 return false;
             } else {
