@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TriInspector;
 using UnityEngine;
+using UnityExtended.Core.Types;
 
 namespace UnityExtended.Core.Utilities {
 #nullable enable
@@ -11,13 +12,13 @@ namespace UnityExtended.Core.Utilities {
     [Serializable]
     public class OnContactImpulseModifierRuntimeHelper {
         private readonly OnContactImpulseModifier modifier;
-        private readonly Dictionary<int, Rigidbody> affectedIDs;
+        private readonly ObservableDictionary<int, Rigidbody> affectedIDs;
 
         [Tooltip("Rigidbody to add or remove.")]
         [SerializeField]
         private Rigidbody? rb;
 
-        public OnContactImpulseModifierRuntimeHelper(OnContactImpulseModifier modifier, Dictionary<int, Rigidbody> affectedIDs) {
+        public OnContactImpulseModifierRuntimeHelper(OnContactImpulseModifier modifier, ObservableDictionary<int, Rigidbody> affectedIDs) {
             this.modifier = modifier;
             this.affectedIDs = affectedIDs;
         }
@@ -50,11 +51,6 @@ namespace UnityExtended.Core.Utilities {
             Debug.Log($"Affected Rigidbodies IDs for {modifier.name}:");
 
             foreach (var id in affectedIDs.Keys) Debug.Log(id);
-        }
-
-        [Button("Sync Inspector values")]
-        private void SyncInspectorValues() { 
-            modifier.SyncInspectorValues();
         }
     }
 }

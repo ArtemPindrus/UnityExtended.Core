@@ -3,6 +3,7 @@ using Unity.Collections;
 using UnityEngine;
 using System.Linq;
 using TriInspector;
+using UnityExtended.Core.Types;
 
 namespace UnityExtended.Core.Utilities {
     /// <summary>
@@ -15,7 +16,7 @@ namespace UnityExtended.Core.Utilities {
         /// <summary>
         /// A dictionary of affected RigidBodies keyed by their IDs, contact with which will be modified.
         /// </summary>
-        private Dictionary<int, Rigidbody> affectedIDsToRBs;
+        private ObservableDictionary<int, Rigidbody> affectedIDsToRBs;
         private Rigidbody thisRB;
         private int thisRBID;
 
@@ -54,7 +55,7 @@ namespace UnityExtended.Core.Utilities {
         /// <param name="othersRBScaler"></param>
         /// <param name="component">Created component. Null if failed to attach.</param>
         /// <returns>Whether succeeded attaching component.</returns>
-        public static bool Attach(GameObject gameObject, Dictionary<int, Rigidbody> affectedIDsToRBs, float thisRBScaler, float othersRBScaler, out OnContactImpulseModifier component) {
+        public static bool Attach(GameObject gameObject, ObservableDictionary<int, Rigidbody> affectedIDsToRBs, float thisRBScaler, float othersRBScaler, out OnContactImpulseModifier component) {
             if (gameObject.TryGetComponent<OnContactImpulseModifier>(out _)) {
                 component = null!; // ignore. User should check for bool before accessing created component.
 
@@ -64,12 +65,18 @@ namespace UnityExtended.Core.Utilities {
 
                 component = gameObject.AddComponent<OnContactImpulseModifier>();
 
-                attachingInstance = false;
-
                 component.affectedIDsToRBs = affectedIDsToRBs;
                 component.runtimeInspectorHelper = new(component, affectedIDsToRBs);
                 component.thisRBScaler = thisRBScaler;
                 component.othersRBScaler = othersRBScaler;
+
+#if UNITY_EDITOR
+                affectedIDsToRBs.CollectionChanged += component.SyncInspectorValues;
+#endif
+
+                component.SyncInspectorValues();
+
+                attachingInstance = false;
 
                 return true;
             }
@@ -113,6 +120,10 @@ namespace UnityExtended.Core.Utilities {
             if (!attachingInstance) {
                 affectedIDsToRBs ??= new();
                 runtimeInspectorHelper = new(this, affectedIDsToRBs);
+
+#if UNITY_EDITOR
+                affectedIDsToRBs.CollectionChanged += SyncInspectorValues;
+#endif
             }
 
             foreach (var collider in GetComponentsInChildren<Collider>()) {
