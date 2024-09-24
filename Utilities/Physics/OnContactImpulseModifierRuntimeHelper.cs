@@ -40,7 +40,7 @@ namespace UnityExtended.Core.Utilities {
             rb = null;
         }
 
-        [Button(nameof(PrintAffectedIDs))]
+        [Button("Print IDs of affected Rigidbodies")]
         private void PrintAffectedIDs() {
             if (!Application.isPlaying) {
                 Debug.LogError($"Can print affected ID only when runtime is up/when in play mode.");
@@ -50,6 +50,11 @@ namespace UnityExtended.Core.Utilities {
             Debug.Log($"Affected Rigidbodies IDs for {modifier.name}:");
 
             foreach (var id in affectedIDs.Keys) Debug.Log(id);
+        }
+
+        [Button("Sync Inspector values")]
+        private void SyncInspectorValues() { 
+            modifier.SyncInspectorValues();
         }
     }
 }
