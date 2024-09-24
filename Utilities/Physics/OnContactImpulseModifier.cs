@@ -10,6 +10,8 @@ namespace UnityExtended.Core.Utilities {
     /// </summary>
     [RequireComponent(typeof(Rigidbody))]
     public class OnContactImpulseModifier : MonoBehaviour {
+        private static bool attachingInstance = false;
+
         /// <summary>
         /// A dictionary of affected RigidBodies keyed by their IDs, contact with which will be modified.
         /// </summary>
@@ -44,6 +46,7 @@ namespace UnityExtended.Core.Utilities {
 
         /// <summary>
         /// Attach modifier component to a gameobject. Useful when multiple modifiers use the same set of affected Rigidbodies instantiated elsewhere.
+        /// <para>NOT THREAD-SAFE!</para>
         /// </summary>
         /// <param name="gameObject">Gameobject to attach component to.</param>
         /// <param name="affectedIDsToRBs">Dictionary of affected Rigidbodies keyed by their instance ID.</param>
@@ -57,9 +60,14 @@ namespace UnityExtended.Core.Utilities {
 
                 return false;
             } else {
+                attachingInstance = true;
+
                 component = gameObject.AddComponent<OnContactImpulseModifier>();
 
+                attachingInstance = false;
+
                 component.affectedIDsToRBs = affectedIDsToRBs;
+                component.runtimeInspectorHelper = new(component, affectedIDsToRBs);
                 component.thisRBScaler = thisRBScaler;
                 component.othersRBScaler = othersRBScaler;
 
@@ -101,8 +109,11 @@ namespace UnityExtended.Core.Utilities {
         private void Awake() {
             thisRB = GetComponent<Rigidbody>();
             thisRBID = thisRB.GetInstanceID();
-            affectedIDsToRBs ??= new();
-            runtimeInspectorHelper = new(this, affectedIDsToRBs);
+
+            if (!attachingInstance) {
+                affectedIDsToRBs ??= new();
+                runtimeInspectorHelper = new(this, affectedIDsToRBs);
+            }
 
             foreach (var collider in GetComponentsInChildren<Collider>()) {
                 collider.hasModifiableContacts = true;
@@ -110,7 +121,7 @@ namespace UnityExtended.Core.Utilities {
 
             UnityEngine.Physics.ContactModifyEvent += OnContactModifyEvent;
 
-            if (affectedRigidbodies != null) {
+            if (affectedRigidbodies != null && !attachingInstance) {
                 foreach (var initiallyAffected in affectedRigidbodies) affectedIDsToRBs.Add(initiallyAffected.GetInstanceID(), initiallyAffected);
             }
         }
