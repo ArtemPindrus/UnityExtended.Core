@@ -22,6 +22,6 @@ namespace UnityExtended.Core.Utilities {
 
             DestroyImmediate(this);
         }
-    }
 #endif
+    }
 }
