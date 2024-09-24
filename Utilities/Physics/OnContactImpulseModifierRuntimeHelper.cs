@@ -49,7 +49,7 @@ namespace UnityExtended.Core.Utilities {
 
             Debug.Log($"Affected Rigidbodies IDs for {modifier.name}:");
 
-            foreach (var id in affectedIDs) Debug.Log(id);
+            foreach (var id in affectedIDs.Keys) Debug.Log(id);
         }
     }
 }
