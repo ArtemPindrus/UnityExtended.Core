@@ -9,6 +9,7 @@ namespace UnityExtended.Core.Extensions {
     public static class GameObjectExtensions {
         /// <summary>
         /// Duplicates component onto another <see cref="GameObject"/>.
+        /// <para>Uses reflection.</para>
         /// </summary>
         /// <typeparam name="T">Type derived from <see cref="Component"/>.</typeparam>
         /// <param name="gameObj"><see cref="GameObject"/> on which a duplicate is attached.</param>
@@ -29,6 +30,7 @@ namespace UnityExtended.Core.Extensions {
         /// <summary>
         /// Adds duplicate of collider onto another <see cref="GameObject"/>.
         /// Use instead of <see cref="AddDuplicate{T}(GameObject, T)"/> for <see cref="Collider"/>s.
+        /// <para>Uses reflection.</para>
         /// </summary>
         /// <param name="gameObj"><see cref="GameObject"/> on which a duplicate is attached.</param>
         /// <param name="duplicant"><see cref="Collider"/> to duplicate.</param>
