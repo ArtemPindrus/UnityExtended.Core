@@ -1,8 +1,7 @@
 ﻿using System;
-using UnityEngine;
 
 namespace UnityExtended.Core.Extensions {
-    public static class MathExtended {
+    public static class MathExtensions {
         /// <summary>
         /// Just like Math.Sign() but returns 0 if the given value is zero.
         /// </summary>
@@ -24,7 +23,7 @@ namespace UnityExtended.Core.Extensions {
         /// <param name="value">Value to put in range.</param>
         /// <returns><see cref="float"/> in [-180; 180] range.</returns>
         public static float Overflow180(this float value) {
-            return RangeOverflow(value, -180, 180);
+            return RangeOverflowExclusive(value, -180, 180);
         }
 
         /// <summary>
@@ -35,17 +34,32 @@ namespace UnityExtended.Core.Extensions {
         /// <param name="min">Min value of the range. Should be the least number in the range.</param>
         /// <param name="max">Max value of the range. Should be the greatest number in the range.</param>
         /// <returns>Overflowed <paramref name="value"/>.</returns>
-        public static float RangeOverflow(float value, float min, float max) { // value 721, min -180, max 180
+        public static float RangeOverflowExclusive(float value, float min, float max) {
+            float range = max - min;
             float clamped = value;
 
             if (value > max) {
-                float overflow = value % max;
+                float overflow = value - max;
 
-                clamped = overflow == 0 ? max : min + overflow;
+                if (overflow < range) {
+                    clamped = min + overflow;
+                } else {
+                    float modulus = overflow % range;
+
+                    if (modulus == 0) clamped = max;
+                    else clamped = min + modulus;
+                }
             } else if (value < min) {
-                float overflow = value % min;
+                float overflow = value - min;
 
-                clamped = overflow == 0 ? min : max + overflow;
+                if (overflow < range) {
+                    clamped = max + overflow;
+                } else {
+                    float modulus = range % overflow;
+
+                    if (modulus == 0) clamped = min;
+                    else clamped = max + modulus;
+                }
             }
 
             return clamped;
