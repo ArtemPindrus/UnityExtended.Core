@@ -22,4 +22,16 @@ public class MathExtensionsTests {
 
         Assert.That(result, Is.EqualTo(expectedResult));
     }
+
+    [TestCase(180, 180)]
+    [TestCase(-180, -180)]
+    [TestCase(-181, 179)]
+    [TestCase(181, -179)]
+    [TestCase(360, 0)]
+    [TestCase(721, 1)]
+    public void Overflow180(float value, float expected) { 
+        float result = MathExtensions.Overflow180(value);
+
+        Assert.That(result, Is.EqualTo(expected));
+    }
 }
