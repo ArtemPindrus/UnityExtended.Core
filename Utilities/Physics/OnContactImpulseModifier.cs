@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Unity.Collections;
-using UnityEngine;
 using System.Linq;
 using TriInspector;
+using Unity.Collections;
+using UnityEngine;
 using UnityExtended.Core.Types;
 
 namespace UnityExtended.Core.Utilities {

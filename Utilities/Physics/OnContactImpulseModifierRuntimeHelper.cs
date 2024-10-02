@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using TriInspector;
 using UnityEngine;
 using UnityExtended.Core.Types;

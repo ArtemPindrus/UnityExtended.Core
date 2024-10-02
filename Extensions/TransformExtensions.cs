@@ -11,7 +11,7 @@ namespace UnityExtended.Core.Extensions {
         /// <param name="transform"><see cref="Transform"/> to position.</param>
         /// <param name="localPosition">Local point to position in the world space.</param>
         /// <param name="newPosition">World position of the local point.</param>
-        public static void SetPositionOf(this Transform transform, Vector3 localPosition, Vector3 newPosition) { 
+        public static void SetPositionOf(this Transform transform, Vector3 localPosition, Vector3 newPosition) {
             transform.position = newPosition - localPosition;
         }
     }

@@ -58,9 +58,9 @@ namespace UnityExtended.Core.Types {
         }
 
         public bool Contains(KeyValuePair<TKey, TValue> item) => dictionary.TryGetValue(item.Key, out TValue value) && value != null && value.Equals(item.Value);
-        
+
         public bool ContainsKey(TKey key) => dictionary.ContainsKey(key);
-        
+
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => dictionary.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
