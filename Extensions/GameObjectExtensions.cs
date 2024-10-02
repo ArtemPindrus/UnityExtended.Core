@@ -36,8 +36,9 @@ namespace UnityExtended.Core.Extensions {
         public static Collider AddDuplicateCollider(this GameObject gameObj, Collider duplicant) {
             if (duplicant is BoxCollider box) return gameObj.AddDuplicate(box);
             else if (duplicant is SphereCollider sphere) return gameObj.AddDuplicate(sphere);
+            else if (duplicant is CapsuleCollider capsule) return gameObj.AddDuplicate(capsule);
             else if (duplicant is MeshCollider mesh) return gameObj.AddDuplicate(mesh);
-            else throw new NotImplementedException();
+            else throw new ArgumentException($"{nameof(AddDuplicateCollider)} doesn't support {duplicant.GetType()} type.", nameof(duplicant));
         }
 
         /// <summary>
