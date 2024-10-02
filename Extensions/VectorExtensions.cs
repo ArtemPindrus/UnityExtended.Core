@@ -7,19 +7,19 @@ namespace UnityExtended.Core.Extensions {
     public static class VectorExtensions {
         /// <summary>
         /// Modifies a <see cref="Vector3"/> to have given components. 
-        /// If a component is assigned a NaN - it'll get ignored.
+        /// If a component is assigned a null - it'll get ignored.
         /// </summary>
         /// <param name="v">Modified <see cref="Vector3"/>.</param>
         /// <param name="x">New value of the x component.</param>
         /// <param name="y">New value of the y component.</param>
         /// <param name="z">New value of the z component.</param>
         /// <returns>Modified <see cref="Vector3"/>.</returns>
-        public static Vector3 With(this Vector3 v, float x = float.NaN, float y = float.NaN, float z = float.NaN) {
+        public static Vector3 With(this Vector3 v, float? x = null, float? y = null, float? z = null) {
             Vector3 result = v;
 
-            if (!float.IsNaN(x)) result.x = x;
-            if (!float.IsNaN(y)) result.y = y;
-            if (!float.IsNaN(z)) result.z = z;
+            if (x != null) result.x = x.Value;
+            if (z != null) result.z = z.Value;
+            if (y != null) result.y = y.Value;
 
             return result;
         }
