@@ -12,7 +12,7 @@ namespace UnityExtended.Core.Extensions {
             0 => 0,
             > 0 => 1,
             < 0 => -1,
-            _ => throw new ArgumentException("Sign for the given number is not defined!"),
+            _ => throw new ArgumentException("Sign for the given number is not defined!", nameof(number)),
         };
 
         /// <summary>
