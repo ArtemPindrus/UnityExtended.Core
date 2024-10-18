@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 namespace UnityExtended.Core.EditorSceneTools {
     [AddComponentMenu("")]
     public class SceneReLoad : MonoBehaviour, IEditorSceneTool {
+#if UNITY_EDITOR
         [SerializeField]
         private SceneAsset scene;
 
@@ -21,5 +22,6 @@ namespace UnityExtended.Core.EditorSceneTools {
         public void ReloadCurrentScene() {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
         }
+#endif
     }
 }
