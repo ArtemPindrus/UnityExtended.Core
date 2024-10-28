@@ -100,4 +100,12 @@ namespace UnityExtended.Core.Extensions {
 			return new Vector3(divident.x / divisor.x, divident.y / divisor.y, divident.z / divisor.z);
 		}
 	}
+        public static Vector2 With(this Vector2 v, float? x = null, float? y = null) {
+            Vector3 result = v;
+
+            if (x != null) result.x = x.Value;
+            if (y != null) result.y = y.Value;
+
+            return result;
+        }
 }
