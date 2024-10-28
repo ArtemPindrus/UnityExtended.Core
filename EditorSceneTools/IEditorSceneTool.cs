@@ -1,4 +1,4 @@
 ﻿namespace UnityExtended.Core.EditorSceneTools {
-	public interface IEditorSceneTool {
-	}
+    public interface IEditorSceneTool {
+    }
 }
