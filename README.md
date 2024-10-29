@@ -10,12 +10,7 @@ The code is thoroughly documented. If you wonder what any method or utility does
 - [EditorAttributes](https://github.com/v0lt13/EditorAttributes)
 
 # Supported versions:
-- Unity 2022.3
 - Unity 6+
-
-I haven't tested versions prior to 2022.3.
-
-Unity 6 presented some good API changes, so I try to accommodate to both APIs with conditional compilation, but if you encounter compilation errors on 2022.3, let me know.
 
 # Modules
 Some parts of package are optional and are installed separately.
