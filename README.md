@@ -7,7 +7,7 @@ Use it for anything. Commercial use as well. No credits required.
 The code is thoroughly documented. If you wonder what any method or utility does - just read the summary on the definition.
 
 # Dependencies
-- [Tri-Inspector](https://github.com/codewriter-packages/Tri-Inspector)
+- [EditorAttributes](https://github.com/v0lt13/EditorAttributes)
 
 # Supported versions:
 - Unity 2022.3
