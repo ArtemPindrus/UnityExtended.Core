@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using EditorAttributes;
+using System.Collections.Generic;
 using System.Linq;
-using TriInspector;
 using Unity.Collections;
 using UnityEngine;
 using UnityExtended.Core.Types;
@@ -31,7 +31,7 @@ namespace UnityExtended.Core.Utilities {
         [DisableInEditMode]
         private OnContactImpulseModifierRuntimeHelper runtimeInspectorHelper;
 
-        [InfoBox("Remember that setting the inverse mass/inertia scales to values < 1 makes the objects appear heavier, while setting them to values > 1 makes objects appear lighter.\n" +
+        [HelpBox("Remember that setting the inverse mass/inertia scales to values < 1 makes the objects appear heavier, while setting them to values > 1 makes objects appear lighter.\n" +
                  "HINT: VelocityDelta = impulse / mass OR impulse * inverseMass. (so the less the inverseMass the less the resulting VelocityDelta)")]
         [Tooltip("When interacting with Affected Rigidbodies what's the inverse mass scale of THIS body (the body with the script attached).")]
         [SerializeField]

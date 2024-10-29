@@ -1,5 +1,5 @@
-﻿using System;
-using TriInspector;
+﻿using EditorAttributes;
+using System;
 using UnityEngine;
 using UnityExtended.Core.Types;
 
@@ -22,9 +22,10 @@ namespace UnityExtended.Core.Utilities {
             this.affectedIDs = affectedIDs;
         }
 
-        [InfoBox("Use Add/Remove Buttons to add/remove Rigidbody above (Rb) to the list of affected Rigidbodies.")]
+        [HelpBox("Use Add/Remove Buttons to add/remove Rigidbody above (Rb) to the list of affected Rigidbodies.")]
+        private EditorAttributes.Void helpBox;
 
-        [Button(nameof(Add))]
+        [Button]
         private void Add() {
             if (rb == null) return;
 

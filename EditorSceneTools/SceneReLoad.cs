@@ -1,4 +1,4 @@
-﻿using TriInspector;
+﻿using EditorAttributes;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,17 +11,19 @@ namespace UnityExtended.Core.EditorSceneTools {
         private SceneAsset scene;
 
 #nullable enable
-        [Button(nameof(LoadReferencedScene))]
+#pragma warning disable IDE0051 // Remove unused private members. Used in inspector.
+        [Button]
         private void LoadReferencedScene() {
             if (scene == null) return;
 
             SceneManager.LoadScene(scene.name, LoadSceneMode.Single);
         }
 
-        [Button(nameof(ReloadCurrentScene))]
-        public void ReloadCurrentScene() {
+        [Button]
+        private void ReloadCurrentScene() {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
         }
+#pragma warning restore IDE0051 // Remove unused private members
 #endif
     }
 }

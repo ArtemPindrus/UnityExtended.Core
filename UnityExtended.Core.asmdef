@@ -2,7 +2,7 @@
     "name": "UnityExtended.Core",
     "rootNamespace": "UnityExtended.Core",
     "references": [
-        "GUID:324caed91501a9c47a04ebfd87b68794"
+        "GUID:febaf25a60dafbd44941357b21678606"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
