@@ -16,5 +16,11 @@ namespace UnityExtended.Core.Extensions {
             source.Play(resources[randomInd]);
         }
 
+        public static async UniTask PlayAndWait(this AudioSource source, AudioResource? resource = null, int delta = 0) {
+            if (resource != null) source.Play(resource);
+            else source.Play();
+
+            await UniTask.WaitForSeconds(source.clip.length + delta);
+        }
     }
 }
