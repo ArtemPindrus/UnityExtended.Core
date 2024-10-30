@@ -5,6 +5,8 @@ using UnityEngine.Audio;
 #nullable enable
 namespace UnityExtended.Core.Extensions {
     public static class AudioSourceExtensions {
+        public static void Play(this AudioSource source, AudioResource resource) {
+            source.resource = resource;
 
             source.Play();
         }
