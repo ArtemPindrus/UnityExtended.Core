@@ -10,12 +10,7 @@ The code is thoroughly documented. If you wonder what any method or utility does
 - [EditorAttributes](https://github.com/v0lt13/EditorAttributes)
 
 # Supported versions:
-- Unity 2022.3
 - Unity 6+
-
-I haven't tested versions prior to 2022.3.
-
-Unity 6 presented some good API changes, so I try to accommodate to both APIs with conditional compilation, but if you encounter compilation errors on 2022.3, let me know.
 
 # Modules
 Some parts of package are optional and are installed separately.
@@ -24,11 +19,3 @@ Some parts of package are optional and are installed separately.
 # Installation
 - Install all the [Dependencies](#dependencies).
 - Clone repository into desired folder inside Assets folder of your project. (the same applies for modules)
-
-# Features
-## Selective Kinematics with OnContactImpulseModifier
-OnContactImpulseModifier can be used to modify the inverse mass and inverse inertia scales during collisions of Rigidbodies (effectively modifying impulses applied to bodies).
-One of the use cases for it is Selective Kinematics, which is Rigidbody's ability to ignore action forces from SOME objects, while applying action & reaction forces to them AND receiving action forces from OTHER Rigidbodies.
-
-Video:
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/UmZfIb84_9U/maxresdefault.jpg)](https://www.youtube.com/watch?v=UmZfIb84_9U)
