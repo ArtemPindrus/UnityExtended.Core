@@ -29,7 +29,5 @@ namespace UnityExtended.Core.Types {
         public void RemoveReducer(Reducer reducer) => reducers.Remove(reducer);
 
         public float Reduce(float value) => value * SumLeftPercentage;
-
-        public int Reduce(int value) => (int)(value * SumLeftPercentage);
     }
 }
