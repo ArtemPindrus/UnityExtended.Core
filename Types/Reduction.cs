@@ -20,7 +20,12 @@ namespace UnityExtended.Core.Types {
 
         public float SumLeftPercentage => 1 - SumReductionPercentage;
 
-        public void AddReducer(float percentageOfReduction) => reducers.Add(new(percentageOfReduction));
+        public Reducer AddReducer(float percentageOfReduction) {
+            Reducer reducer = new(percentageOfReduction);
+            reducers.Add(reducer);
+
+            return reducer;
+        }
 
         public void RemoveReducer(Reducer reducer) => reducers.Remove(reducer);
 
