@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace FirstPersonController {
+namespace UnityExtended.Core.Types {
     public class Reducer {
         private float reductionPercentage;
 
