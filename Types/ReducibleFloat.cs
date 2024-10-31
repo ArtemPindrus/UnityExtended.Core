@@ -30,7 +30,11 @@ namespace UnityExtended.Core.Types {
             return reduction.AddReducer(reductionPercentage);
         }
 
-        public void RemoveReducer(Reducer reducer) => reduction.RemoveReducer(reducer);
+        public void RemoveReducer(Reducer reducer) {
+            if (reduction == null) return;
+
+            reduction.RemoveReducer(reducer);
+        }
 
         private void LogReduced() => Debug.Log(Value);
     }
