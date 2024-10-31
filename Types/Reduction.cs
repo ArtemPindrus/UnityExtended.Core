@@ -1,5 +1,4 @@
-﻿using FirstPersonController;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace UnityExtended.Core.Types {
