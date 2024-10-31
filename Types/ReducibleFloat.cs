@@ -13,7 +13,11 @@ namespace UnityExtended.Core.Types {
         /// <summary>
         /// Gets reduced value.
         /// </summary>
-        public float Value => reduction.Reduce(ValueUnchanged);
+        public float Value {
+            get {
+                return reduction == null ? ValueUnchanged : reduction.Reduce(ValueUnchanged);
+            }
+        }
 
         public ReducibleFloat(float initialValue) { 
             reduction = new();   
