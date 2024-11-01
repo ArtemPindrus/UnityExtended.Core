@@ -10,18 +10,27 @@ namespace UnityExtended.Core.Types {
         [field: SerializeField]
         public float ValueUnchanged { get; private set; }
 
+        [field: SerializeField]
+        public float MinimumValue { get; private set; }
+
         /// <summary>
         /// Gets reduced value.
         /// </summary>
         public float Value {
             get {
-                return reduction == null ? ValueUnchanged : reduction.Reduce(ValueUnchanged);
+                if (reduction == null) return ValueUnchanged;
+                else {
+                    float reduced = reduction.Reduce(ValueUnchanged);
+
+                    return reduced < MinimumValue ? MinimumValue : reduced; 
+                }
             }
         }
 
-        public ReducibleFloat(float initialValue) { 
-            reduction = new();   
+        public ReducibleFloat(float initialValue, float minimumValue) {
+            reduction = new();
             ValueUnchanged = initialValue;
+            MinimumValue = minimumValue;
         }
 
         public Reducer AddReducer(float reductionPercentage) {
