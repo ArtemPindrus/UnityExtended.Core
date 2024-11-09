@@ -50,7 +50,5 @@ namespace UnityExtended.Core.Types {
 
             reduction.RemoveReducer(reducer);
         }
-
-        private void LogReduced() => Debug.Log(Value);
     }
 }
