@@ -12,7 +12,7 @@ namespace UnityExtended.Core.Types {
         private static Dictionary<Type, IInputActionCollection2>? instanceKeyedByType;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        private static void Init() {
+        public static void Init() {
             if (instanceKeyedByType != null) {
                 foreach (var value in instanceKeyedByType.Values) {
                     value.Disable();
