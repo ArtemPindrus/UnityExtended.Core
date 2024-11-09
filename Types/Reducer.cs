@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace UnityExtended.Core.Types {
     public class Reducer {
@@ -18,9 +17,7 @@ namespace UnityExtended.Core.Types {
         /// </summary>
         public float ReductionPercentage {
             get => reductionPercentage;
-            set {
-                reductionPercentage = Mathf.Clamp01(value);
-            }
+            set => reductionPercentage = Mathf.Clamp01(value);
         }
 
         public override string ToString() => $"Reducer with {reductionPercentage} value.";
