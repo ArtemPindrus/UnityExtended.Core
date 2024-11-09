@@ -6,7 +6,7 @@ namespace UnityExtended.Core.Extensions {
         /// Just like Math.Sign() but returns 0 if the given value is zero.
         /// </summary>
         /// <param name="number"></param>
-        /// <returns>1 if <paramref name="number"/> is greater then 0, -1 if it's less then 0 or 0 if it's 0</returns>
+        /// <returns>1 if <paramref name="number"/> is greater than 0, -1 if it's less than 0 or 0 if it's 0</returns>
         /// <exception cref="ArgumentException"><paramref name="number"/> is NaN.</exception>
         public static float SignZero(this float number) => number switch {
             0 => 0,
@@ -19,7 +19,7 @@ namespace UnityExtended.Core.Extensions {
         /// Just like Math.Sign() but returns 0 if the given value is zero.
         /// </summary>
         /// <param name="number"></param>
-        /// <returns>1 if <paramref name="number"/> is greater then 0, -1 if it's less then 0 or 0 if it's 0</returns>
+        /// <returns>1 if <paramref name="number"/> is greater than 0, -1 if it's less than 0 or 0 if it's 0</returns>
         public static int SignZero(this int number) => number switch {
             0 => 0,
             > 0 => 1,
