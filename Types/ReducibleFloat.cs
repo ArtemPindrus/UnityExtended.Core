@@ -33,6 +33,12 @@ namespace UnityExtended.Core.Types {
             MinimumValue = minimumValue;
         }
 
+        /// <summary>
+        /// Implicitly convert into float by returning from the <see cref="Value"/>.
+        /// </summary>
+        /// <param name="reducibleFloat"></param>
+        public static implicit operator float(ReducibleFloat reducibleFloat) => reducibleFloat.Value;
+
         public Reducer AddReducer(float reductionPercentage) {
             reduction ??= new();
 
