@@ -53,5 +53,22 @@ namespace UnityExtended.Core.Types
         }
         
         public static implicit operator float(RangeFloat rangeFloat) => rangeFloat.Value;
+
+        private void OnValueChanged() {
+            if (LowerLimit > UpperLimit) {
+                float temp = UpperLimit;
+                UpperLimit = LowerLimit;
+                LowerLimit = temp;
+                
+                Debug.LogWarning("LowerLimit should be less than UpperLimit!");
+            } else if (LowerLimit == UpperLimit) {
+                LowerLimit = value - 1;
+                UpperLimit = value + 1;
+                
+                Debug.LogWarning("LowerLimit and UpperLimit should not equal!");
+            }
+            
+            Value = value;
+        }
     }
 }
