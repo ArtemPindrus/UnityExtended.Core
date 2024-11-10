@@ -42,6 +42,8 @@ namespace UnityExtended.Core.EditorTools {
 
         private void OnGUI() {
             rootVisualElement.visible = Application.isPlaying;
+            
+            if (loadReferencedBtn == null) return;
 
             loadReferencedBtn.visible = sceneAssetField.value != null && Application.isPlaying;
         }
