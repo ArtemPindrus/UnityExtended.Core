@@ -1,7 +1,9 @@
 {
     "name": "UnityExtended.Core.EditorTools",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:4d04a5f2f16fba94da7912c13a50d6dc"
+    ],
     "includePlatforms": [
         "Editor"
     ],
