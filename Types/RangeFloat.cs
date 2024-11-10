@@ -1,4 +1,5 @@
 ﻿using System;
+using EditorAttributes;
 using UnityEngine;
 using UnityExtended.Core.Extensions;
 
@@ -7,11 +8,14 @@ namespace UnityExtended.Core.Types
     [Serializable]
     public class RangeFloat {
         [SerializeField]
+        [ReadOnly]
         private float value;
         
+        [ReadOnly]
         [field: SerializeField]
         public float LowerLimit { get; private set; }
         
+        [ReadOnly]
         [field: SerializeField]
         public float UpperLimit { get; private set; }
 
