@@ -3,11 +3,15 @@ using UnityExtended.Core.Extensions;
 
 namespace UnityExtended.Core.Types
 {
-    public class RangeFloat
-    {
+    [Serializable]
+    public class RangeFloat {
+        [SerializeField]
         private float value;
         
+        [field: SerializeField]
         public float LowerLimit { get; private set; }
+        
+        [field: SerializeField]
         public float UpperLimit { get; private set; }
 
         public float Value {
