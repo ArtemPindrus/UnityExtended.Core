@@ -4,7 +4,12 @@ using UnityEditor;
 #nullable  enable
 namespace UnityExtended.Core.Extensions {
     public static class SerializedPropertyExtensions {
-        public static object GetValue(this SerializedProperty property) {
+        /// <summary>
+        /// Gets object that contains this SerializableProperty.
+        /// </summary>
+        /// <param name="property"></param>
+        /// <returns></returns>
+        public static object GetContainingObject(this SerializedProperty property) {
             string[] pathParts = property.propertyPath.Split(".");
             object currentObject = property.serializedObject.targetObject;
             FieldInfo? field = null;
