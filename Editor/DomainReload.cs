@@ -28,6 +28,8 @@ namespace UnityExtended.Core.EditorTools {
         }
 
         private void OnGUI() {
+            if (reloadDomainBtn == null) return;
+            
             reloadDomainBtn.SetEnabled(true);
             topLabel.text = "";
 
