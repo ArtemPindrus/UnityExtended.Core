@@ -41,10 +41,5 @@ namespace UnityExtended.Core.Types
         }
         
         public static implicit operator float(RangeFloat rangeFloat) => rangeFloat.Value;
-
-        private void OnValidate() {
-            // reevaluate
-            Value = value;
-        }
     }
 }
