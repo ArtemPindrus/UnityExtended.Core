@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityExtended.Core.Extensions;
 
 namespace UnityExtended.Core.Types
