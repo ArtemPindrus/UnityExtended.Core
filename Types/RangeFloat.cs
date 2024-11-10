@@ -30,6 +30,17 @@ namespace UnityExtended.Core.Types
             Value = initialValue;
         }
 
+        public void SetLimits(float lower, float upper) {
+            if (lower > upper) {
+                throw new ArgumentException($"{nameof(lower)} should be less than {nameof(upper)}.");
+            } else if (lower == upper) throw new Exception($"{nameof(lower)} and {nameof(upper)} shouldn't be equal.");
+            
+            LowerLimit = lower;
+            UpperLimit = upper;
+
+            Value = value;
+        }
+
         public static RangeFloat operator +(RangeFloat rf, float f) {
             rf.Value += f;
             return rf;
