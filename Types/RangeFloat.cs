@@ -55,6 +55,7 @@ namespace UnityExtended.Core.Types
         public static implicit operator float(RangeFloat rangeFloat) => rangeFloat.Value;
 
         private void OnValueChanged() {
+#if UNITY_EDITOR
             if (LowerLimit > UpperLimit) {
                 float temp = UpperLimit;
                 UpperLimit = LowerLimit;
@@ -69,6 +70,7 @@ namespace UnityExtended.Core.Types
             }
             
             Value = value;
+#endif
         }
     }
 }
