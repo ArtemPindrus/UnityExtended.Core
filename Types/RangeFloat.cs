@@ -8,16 +8,17 @@ namespace UnityExtended.Core.Types
     [Serializable]
     public class RangeFloat {
         [SerializeField]
-        [ReadOnly]
-        private float value;
-        
-        [ReadOnly]
-        [field: SerializeField]
-        public float LowerLimit { get; private set; }
-        
-        [ReadOnly]
-        [field: SerializeField]
-        public float UpperLimit { get; private set; }
+        private float value, lowerLimit, upperLimit;
+
+        public float LowerLimit {
+            get => lowerLimit;
+            private set => lowerLimit = value;
+        }
+
+        public float UpperLimit {
+            get => upperLimit;
+            private set => upperLimit = value;
+        }
 
         public float Value {
             get => value;
