@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityExtended.Core.Extensions;
 using UnityExtended.Core.Types;
 
 namespace UnityExtended.Core.EditorTools {
@@ -19,8 +20,7 @@ namespace UnityExtended.Core.EditorTools {
             var upperLimitField = new PropertyField(upperLimitProperty);
 
             var function = typeof(RangeFloat).GetMethod("OnValueChanged", BindingFlags.Instance | BindingFlags.NonPublic);
-            var field = property.serializedObject.targetObject.GetType().GetField(property.name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-            var instance = field.GetValue(property.serializedObject.targetObject);
+            var instance = property.GetValue();
             
 #warning doesn't work if nested custom Serializable types are used
             valueField.RegisterValueChangeCallback((_) => function.Invoke(instance, null));
