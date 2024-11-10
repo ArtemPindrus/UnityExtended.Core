@@ -22,6 +22,7 @@ namespace UnityExtended.Core.EditorTools {
             var field = property.serializedObject.targetObject.GetType().GetField(property.name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
             var instance = field.GetValue(property.serializedObject.targetObject);
             
+#warning doesn't work if nested custom Serializable types are used
             valueField.RegisterValueChangeCallback((_) => function.Invoke(instance, null));
             lowerLimitField.RegisterValueChangeCallback((_) => function.Invoke(instance, null));
             upperLimitField.RegisterValueChangeCallback((_) => function.Invoke(instance, null));
