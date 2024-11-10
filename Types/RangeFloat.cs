@@ -8,6 +8,7 @@ namespace UnityExtended.Core.Types
     [Serializable]
     public class RangeFloat {
         [SerializeField]
+        [OnValueChanged(nameof(OnValueChanged))]
         private float value, lowerLimit, upperLimit;
 
         public float LowerLimit {
