@@ -12,7 +12,7 @@ namespace UnityExtended.Core.Types
 
         public float Value {
             get => value;
-            private set => this.value = MathExtensions.RangeOverflowExclusive(value, LowerLimit, UpperLimit);
+            set => this.value = MathExtensions.RangeOverflowExclusive(value, LowerLimit, UpperLimit);
         }
 
         public RangeFloat(float lowerLimit, float upperLimit, float initialValue) {
