@@ -45,6 +45,8 @@ namespace UnityExtended.Core.EditorTools {
         }
 
         public void OnGUI() {
+            if (timeScaleSlider == null) return;
+            
             timeScaleSlider.SetEnabled(toggle.value);
 
             if (toggle.value) {
