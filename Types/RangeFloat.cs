@@ -7,6 +7,8 @@ namespace UnityExtended.Core.Types
 {
     [Serializable]
     public class RangeFloat {
+        public bool logOnValueChangedErrors = true;
+        
         [SerializeField]
         [OnValueChanged(nameof(OnValueChanged))]
         private float value, lowerLimit, upperLimit;
@@ -63,11 +65,12 @@ namespace UnityExtended.Core.Types
                 LowerLimit = temp;
                 
                 Debug.LogWarning("LowerLimit should be less than UpperLimit!");
+                if (logOnValueChangedErrors) Debug.LogWarning("LowerLimit should be less than UpperLimit!");
             } else if (LowerLimit == UpperLimit) {
                 LowerLimit = value - 1;
                 UpperLimit = value + 1;
                 
-                Debug.LogWarning("LowerLimit and UpperLimit should not equal!");
+                if (logOnValueChangedErrors) Debug.LogWarning("LowerLimit and UpperLimit should not equal!");
             }
             
             Value = value;
