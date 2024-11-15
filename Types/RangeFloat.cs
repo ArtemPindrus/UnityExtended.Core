@@ -60,11 +60,8 @@ namespace UnityExtended.Core.Types
         private void OnValueChanged() {
 #if UNITY_EDITOR
             if (LowerLimit > UpperLimit) {
-                float temp = UpperLimit;
-                UpperLimit = LowerLimit;
-                LowerLimit = temp;
-                
-                Debug.LogWarning("LowerLimit should be less than UpperLimit!");
+                (UpperLimit, LowerLimit) = (LowerLimit, UpperLimit);
+
                 if (logOnValueChangedErrors) Debug.LogWarning("LowerLimit should be less than UpperLimit!");
             } else if (LowerLimit == UpperLimit) {
                 LowerLimit = value - 1;
