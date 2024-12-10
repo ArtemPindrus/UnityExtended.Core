@@ -14,7 +14,6 @@ namespace UnityExtended.Core.EditorTools {
         }
 
         public void CreateGUI() {
-            // Each editor window contains a root VisualElement object
             VisualElement root = rootVisualElement;
 
             topLabel = new();
