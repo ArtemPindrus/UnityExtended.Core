@@ -5,6 +5,26 @@ namespace UnityExtended.Core.Extensions {
     /// Provides additional functionality to the <see cref="Vector3"/> class.
     /// </summary>
     public static class VectorExtensions {
+        public static float Max(this Vector3 v) {
+            float max = Single.MinValue;
+
+            if (v.x > max) max = v.x;
+            if (v.y > max) max = v.y;
+            if (v.z > max) max = v.z;
+
+            return max;
+        }
+        
+        public static float Max(this Vector3 v, bool includeX, bool includeY, bool includeZ) {
+            float max = Single.MinValue;
+
+            if (includeX && v.x > max) max = v.x;
+            if (includeY && v.y > max) max = v.y;
+            if (includeZ && v.z > max) max = v.z;
+
+            return max;
+        }
+        
         /// <summary>
         /// Modifies a <see cref="Vector3"/> to have given components. 
         /// If a component is assigned a null - it'll get ignored.
