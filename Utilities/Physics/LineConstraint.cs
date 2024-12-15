@@ -1,11 +1,12 @@
+using EditorAttributes;
 using UnityEngine;
 using UnityExtended.Core.Extensions;
 
 namespace UnityExtended.Core.Utilities.Physics {
-    [RequireComponent(typeof(Rigidbody))]
     /// <summary>
     /// Component that restricts rigidbody movement to the line between two points.
     /// </summary>
+    [RequireComponent(typeof(Rigidbody))]
     public class LineConstraint : MonoBehaviour {
         private const float DebugSpheresRadius = 0.1f;
 
@@ -13,7 +14,7 @@ namespace UnityExtended.Core.Utilities.Physics {
         [Tooltip("Visualize two endpoints and the line between them.")]
         private bool debug;
         [Tooltip(@"Whether to perform second iteration (RECOMMENDED ON).
-Normally component alligns both position and velocity BEFORE the physics simulation. With this bool set to true it repeats the process AFTER physics simulation.
+Normally component aligns both position and velocity BEFORE the physics simulation. With this bool set to true it repeats the process AFTER physics simulation.
 Produces more accurate results, obviously at the cost of performance (really little overhead).
 CHANGING VALUE REQUIRES RELOAD.")]
         [SerializeField]
@@ -24,7 +25,7 @@ CHANGING VALUE REQUIRES RELOAD.")]
         private Vector3 secondPoint;
 
         private Rigidbody rb;
-        private Vector3 lastAllignedPosition;
+        private Vector3 lastAlignedPosition;
 
         /// <summary>
         /// Gets a vector pointing from <see cref="firstPoint"/> to the <see cref="secondPoint"/>.
@@ -46,7 +47,7 @@ CHANGING VALUE REQUIRES RELOAD.")]
         }
 
         private void FixedUpdate() {
-            // Aligning position and velocity before any forces are applied by PhysX. Makes physics simulation itself accurate.
+            // Aligning position and velocity before any forces are applied by PhysX. This makes physics simulation itself accurate.
 
             AlignPosition();
             AlignRestrictVelocity();
@@ -64,7 +65,7 @@ CHANGING VALUE REQUIRES RELOAD.")]
             if (!useTransformInstead) rb.position = target;
             else transform.position = target;
 
-            lastAllignedPosition = rb.position;
+            lastAlignedPosition = rb.position;
         }
 
         private void AlignRestrictVelocity() {
@@ -100,7 +101,7 @@ CHANGING VALUE REQUIRES RELOAD.")]
 
             // Intercept movement made by physics simulation and instead move the body along the line constraint.
 #if UNITY_6000_0_OR_NEWER
-            Vector3 targetPoint = lastAllignedPosition + rb.linearVelocity * Time.fixedDeltaTime;
+            Vector3 targetPoint = lastAlignedPosition + rb.linearVelocity * Time.fixedDeltaTime;
 #elif UNITY_2022_3_OR_NEWER
             Vector3 targetPoint = lastAllignedPosition + rb.velocity * Time.fixedDeltaTime;
 #endif
