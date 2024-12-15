@@ -111,6 +111,13 @@ CHANGING VALUE REQUIRES RELOAD.")]
             AlignPosition(true);
         }
 
+        [Button]
+        private void FromLocalPoints(Vector3 first, Vector3 second) {
+            Transform parent = transform.parent;
+            firstPoint = parent.TransformPoint(first);
+            secondPoint = parent.TransformPoint(second);
+        }
+
         private void OnDrawGizmos() {
             if (debug) {
                 Gizmos.DrawWireSphere(secondPoint, DebugSpheresRadius);
