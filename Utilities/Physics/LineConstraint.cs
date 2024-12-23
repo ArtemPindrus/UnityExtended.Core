@@ -37,6 +37,19 @@ CHANGING VALUE REQUIRES RELOAD.")]
         /// </summary>
         public Vector3 FirstToSecondDir { get; private set; }
 
+        /// <summary>
+        /// Align position of an arbitrary <see cref="Transform"/> to the same line constraint. 
+        /// </summary>
+        /// <param name="custom">Transform to align.</param>
+        public void AlignPositionCustom(Transform custom) {
+            Vector3 firstToBody = custom.position - FirstPoint;
+            Vector3 aligned = firstToBody.ProjectClamped(FirstToSecond);
+
+            Vector3 target = FirstPoint + aligned;
+
+            custom.position = target;
+        }
+
         private void Awake() {
             rb = GetComponent<Rigidbody>();
 
