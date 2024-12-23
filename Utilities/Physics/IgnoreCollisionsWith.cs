@@ -34,7 +34,7 @@ namespace UnityExtended.Core.External.UnityExtended.Core.Utilities.Physics {
         }
 
         private void OnDrawGizmosSelected() {
-            if(!showIgnoredColliders) return;
+            if(!showIgnoredColliders || otherColliders == null) return;
             
             Gizmos.color = Color.red;
             
