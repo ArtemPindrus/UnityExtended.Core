@@ -71,11 +71,7 @@ CHANGING VALUE REQUIRES RELOAD.")]
         private void AlignRestrictVelocity() {
             Vector3 currentPosition = rb.position;
 
-#if UNITY_6000_0_OR_NEWER
             Vector3 projectedVelocity = Vector3.Project(rb.linearVelocity, FirstToSecondDir);
-#elif UNITY_2022_3_OR_NEWER
-            Vector3 projectedVelocity = Vector3.Project(rb.velocity, FirstToSecondDir);
-#endif
 
             Vector3 projectedDirection = projectedVelocity.normalized;
 
@@ -85,11 +81,7 @@ CHANGING VALUE REQUIRES RELOAD.")]
                 projectedVelocity = Vector3.zero;
             }
 
-#if UNITY_6000_0_OR_NEWER
             rb.linearVelocity = projectedVelocity;
-#elif UNITY_2022_3_OR_NEWER
-            rb.velocity = projectedVelocity;
-#endif
         }
 
         /// <summary>
@@ -100,11 +92,7 @@ CHANGING VALUE REQUIRES RELOAD.")]
             AlignRestrictVelocity();
 
             // Intercept movement made by physics simulation and instead move the body along the line constraint.
-#if UNITY_6000_0_OR_NEWER
             Vector3 targetPoint = lastAlignedPosition + rb.linearVelocity * Time.fixedDeltaTime;
-#elif UNITY_2022_3_OR_NEWER
-            Vector3 targetPoint = lastAllignedPosition + rb.velocity * Time.fixedDeltaTime;
-#endif
             rb.position = targetPoint;
 
             // Align new position (overshot may happen on previous movement)
