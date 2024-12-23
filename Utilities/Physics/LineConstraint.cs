@@ -106,6 +106,14 @@ CHANGING VALUE REQUIRES RELOAD.")]
             secondPoint = parent.TransformPoint(second);
         }
 
+        [Button]
+        private void SetPosition(float t) {
+            t = Mathf.Clamp01(t);
+
+            Vector3 pos = Vector3.Lerp(firstPoint, secondPoint, t);
+            transform.position = pos;
+        }
+
         private void OnDrawGizmos() {
             if (debug) {
                 Gizmos.DrawWireSphere(secondPoint, DebugSpheresRadius);
