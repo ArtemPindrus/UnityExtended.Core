@@ -1,5 +1,6 @@
 using EditorAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityExtended.Core.Extensions;
 
 namespace UnityExtended.Core.Utilities.Physics {
@@ -10,25 +11,29 @@ namespace UnityExtended.Core.Utilities.Physics {
     public class LineConstraint : MonoBehaviour {
         private const float DebugSpheresRadius = 0.1f;
 
+        [FormerlySerializedAs("debug")]
         [SerializeField]
         [Tooltip("Visualize two endpoints and the line between them.")]
-        private bool debug;
+        public bool Debug;
+        
         [Tooltip(@"Whether to perform second iteration (RECOMMENDED ON).
 Normally component aligns both position and velocity BEFORE the physics simulation. With this bool set to true it repeats the process AFTER physics simulation.
 Produces more accurate results, obviously at the cost of performance (really little overhead).
 CHANGING VALUE REQUIRES RELOAD.")]
         [SerializeField]
         private bool performSecondIteration = true;
-        [SerializeField]
-        private Vector3 firstPoint;
-        [SerializeField]
-        private Vector3 secondPoint;
+        
+        [field: SerializeField]
+        public Vector3 FirstPoint { get; private set; }
+        
+        [field: SerializeField]
+        public Vector3 SecondPoint { get; private set; }
 
         private Rigidbody rb;
         private Vector3 lastAlignedPosition;
 
         /// <summary>
-        /// Gets a vector pointing from <see cref="firstPoint"/> to the <see cref="secondPoint"/>.
+        /// Gets a vector pointing from <see cref="FirstPoint"/> to the <see cref="SecondPoint"/>.
         /// </summary>
         public Vector3 FirstToSecond { get; private set; }
 
@@ -36,6 +41,14 @@ CHANGING VALUE REQUIRES RELOAD.")]
         /// Gets normalized <see cref="FirstToSecond"/>.
         /// </summary>
         public Vector3 FirstToSecondDir { get; private set; }
+
+        public void SetPoints(Vector3 newFirstPoint, Vector3 newSecondPoint) {
+            FirstPoint = newFirstPoint;
+            SecondPoint = newSecondPoint;
+            
+            FirstToSecond = SecondPoint - FirstPoint;
+            FirstToSecondDir = FirstToSecond.normalized;
+        }
 
         /// <summary>
         /// Align position of an arbitrary <see cref="Transform"/> to the same line constraint. 
@@ -53,7 +66,7 @@ CHANGING VALUE REQUIRES RELOAD.")]
         private void Awake() {
             rb = GetComponent<Rigidbody>();
 
-            FirstToSecond = secondPoint - firstPoint;
+            FirstToSecond = SecondPoint - FirstPoint;
             FirstToSecondDir = FirstToSecond.normalized;
 
             if (performSecondIteration) this.InvokePostPhysicsUpdate(AfterPhysics);
@@ -70,10 +83,10 @@ CHANGING VALUE REQUIRES RELOAD.")]
         /// Align current position of the rigidbody to be along the line constraint.
         /// </summary>
         private void AlignPosition(bool useTransformInstead = false) {
-            Vector3 firstToBody = transform.position - firstPoint;
+            Vector3 firstToBody = transform.position - FirstPoint;
             Vector3 aligned = firstToBody.ProjectClamped(FirstToSecond);
 
-            Vector3 target = firstPoint + aligned;
+            Vector3 target = FirstPoint + aligned;
 
             if (!useTransformInstead) rb.position = target;
             else transform.position = target;
@@ -88,9 +101,9 @@ CHANGING VALUE REQUIRES RELOAD.")]
 
             Vector3 projectedDirection = projectedVelocity.normalized;
 
-            if (currentPosition == firstPoint && projectedDirection == -FirstToSecondDir) {
+            if (currentPosition == FirstPoint && projectedDirection == -FirstToSecondDir) {
                 projectedVelocity = Vector3.zero;
-            } else if (currentPosition == secondPoint && projectedDirection == FirstToSecondDir) {
+            } else if (currentPosition == SecondPoint && projectedDirection == FirstToSecondDir) {
                 projectedVelocity = Vector3.zero;
             }
 
@@ -115,24 +128,24 @@ CHANGING VALUE REQUIRES RELOAD.")]
         [Button]
         private void FromLocalPoints(Vector3 first, Vector3 second) {
             Transform parent = transform.parent;
-            firstPoint = parent.TransformPoint(first);
-            secondPoint = parent.TransformPoint(second);
+            FirstPoint = parent.TransformPoint(first);
+            SecondPoint = parent.TransformPoint(second);
         }
 
         [Button]
         private void SetPosition(float t) {
             t = Mathf.Clamp01(t);
 
-            Vector3 pos = Vector3.Lerp(firstPoint, secondPoint, t);
+            Vector3 pos = Vector3.Lerp(FirstPoint, SecondPoint, t);
             transform.position = pos;
         }
 
         private void OnDrawGizmos() {
-            if (debug) {
-                Gizmos.DrawWireSphere(secondPoint, DebugSpheresRadius);
-                Gizmos.DrawWireSphere(firstPoint, DebugSpheresRadius);
+            if (Debug) {
+                Gizmos.DrawWireSphere(SecondPoint, DebugSpheresRadius);
+                Gizmos.DrawWireSphere(FirstPoint, DebugSpheresRadius);
 
-                Debug.DrawLine(firstPoint, secondPoint);
+                UnityEngine.Debug.DrawLine(FirstPoint, SecondPoint);
             }
         }
     }
