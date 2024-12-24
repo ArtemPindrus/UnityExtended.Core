@@ -63,23 +63,32 @@ namespace UnityExtended.Core.Utilities {
             
             Align();
         }
+
+        public Vector3 CustomConstraint(Vector3 custom) {
+            Vector3 perp = Perpendicularize(custom);
+            Vector3 constricted = ConstrictToLimits(perp);
+
+            return constricted;
+        }
         
         private void Align() {
-            PerpendicularizeTransform();
-            ConstrictToLimits();
+            transform.position = Perpendicularize(transform.position);
+            transform.position = ConstrictToLimits(transform.position);
         }
 
-        private void PerpendicularizeTransform() {
-            Vector3 directionToBody = (transform.position - Center.position).normalized;
+        private Vector3 Perpendicularize(Vector3 target) {
+            Vector3 directionToBody = (target - Center.position).normalized;
 
             Vector3 pos = directionToBody.Perpendicularize(WorldUpAxis) * Distance;
-            transform.position = Center.position + pos;
+            target = Center.position + pos;
+            
+            return target;
         }
 
-        private void ConstrictToLimits() {
+        private Vector3 ConstrictToLimits(Vector3 target) {
             Vector3 worldUpAxis = WorldUpAxis;
             
-            Vector3 directionToBody = (transform.position - Center.position).normalized;
+            Vector3 directionToBody = (target - Center.position).normalized;
             float angleToBody = Vector3.SignedAngle(Center.forward, directionToBody, worldUpAxis);
 
             if (angleToBody < MinLimit || angleToBody > MaxLimit) {
@@ -90,7 +99,9 @@ namespace UnityExtended.Core.Utilities {
                 directionToBody = angleFromMax < angleFromMin ? MaxDirection : MinDirection;
             }
 
-            transform.position = Center.position + directionToBody * Distance;
+            target = Center.position + directionToBody * Distance;
+
+            return target;
         }
 
         private void Update() {
