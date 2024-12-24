@@ -17,8 +17,6 @@ namespace UnityExtended.Core.Utilities {
 
         [field: SerializeField] 
         public Vector3 LocalUpAxis { get; set; }
-
-        public Vector3 WorldUpAxis => Center.TransformDirection(LocalUpAxis);
         
         [field: SerializeField]
         public float Distance { get; set; }
@@ -30,6 +28,12 @@ namespace UnityExtended.Core.Utilities {
         [field: Range(-180,180)]
         [field: SerializeField]
         public float MinLimit { get; private set; }
+        
+        public Vector3 WorldUpAxis => Center.TransformDirection(LocalUpAxis);
+
+        public Vector3 MaxDirection => Center.forward.RotateAround(WorldUpAxis, MaxLimit);
+        
+        public Vector3 MinDirection => Center.forward.RotateAround(WorldUpAxis, MinLimit);
 
         public static RadiusConstraint Attach(GameObject gameObject, UpdateMode updateMode, Transform center, Vector3 localUpAxis,
             float distance, float maxLimit = 180, float minLimit = -180) {
@@ -78,8 +82,13 @@ namespace UnityExtended.Core.Utilities {
             Vector3 directionToBody = (transform.position - Center.position).normalized;
             float angleToBody = Vector3.SignedAngle(Center.forward, directionToBody, worldUpAxis);
 
-            if (angleToBody < MinLimit) directionToBody = Center.forward.RotateAround(worldUpAxis, MinLimit);
-            else if (angleToBody > MaxLimit) directionToBody = Center.forward.RotateAround(worldUpAxis, MaxLimit);
+            if (angleToBody < MinLimit || angleToBody > MaxLimit) {
+                // find closest
+                float angleFromMax = Vector3.Angle(directionToBody, MaxDirection);
+                float angleFromMin = Vector3.Angle(directionToBody, MinDirection);
+
+                directionToBody = angleFromMax < angleFromMin ? MaxDirection : MinDirection;
+            }
 
             transform.position = Center.position + directionToBody * Distance;
         }
@@ -105,9 +114,8 @@ namespace UnityExtended.Core.Utilities {
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireSphere(Center.position, Distance);
 
-            Vector3 forward = Center.forward;
-            Vector3 min = forward.RotateAround(WorldUpAxis, MinLimit) * Distance;
-            Vector3 max = forward.RotateAround(WorldUpAxis, MaxLimit) * Distance;
+            Vector3 min = MinDirection * Distance;
+            Vector3 max = MaxDirection * Distance;
             
             Gizmos.color = Color.red;
             Gizmos.DrawLine(Center.position, Center.position + min);
