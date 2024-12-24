@@ -143,6 +143,11 @@ namespace UnityExtended.Core.Extensions {
             Vector3 aligned = rotation * reference;
             return aligned;
         }
+
+        public static Vector3 RotateAround(this Vector3 v, Vector3 axis, float angle) {
+            Quaternion rotation = Quaternion.AngleAxis(angle, axis);
+
+            return rotation * v;
         }
     }
 }
