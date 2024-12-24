@@ -129,6 +129,20 @@ namespace UnityExtended.Core.Extensions {
         public static Vector3 Divide(this Vector3 dividend, Vector3 divisor) {
             return new Vector3(dividend.x / divisor.x, dividend.y / divisor.y, dividend.z / divisor.z);
         }
+
+        /// <summary>
+        /// Aligns Vector3 to be perpendicular to the given reference.
+        /// </summary>
+        /// <param name="v">Aligned Vector3.</param>
+        /// <param name="reference">Reference to which the returned Vector3 will be perpendicular.</param>
+        /// <returns>Aligned <see cref="v"/> that is perpendicular to <see cref="reference"/>.</returns>
+        public static Vector3 Perpendicularize(this Vector3 v, Vector3 reference) {
+            Vector3 cross = Vector3.Cross(reference, v);
+            Quaternion rotation = Quaternion.AngleAxis(90, cross);
+
+            Vector3 aligned = rotation * reference;
+            return aligned;
+        }
         }
     }
 }
