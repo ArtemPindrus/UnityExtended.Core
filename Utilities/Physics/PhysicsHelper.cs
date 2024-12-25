@@ -6,6 +6,26 @@ using UnityExtended.Core.Extensions;
 namespace UnityExtended.Core.Utilities.Physics {
     public static class PhysicsHelper {
         /// <summary>
+        /// Calculates torque that would be exerted by a <paramref name="force"/> applied to a <paramref name="forcePos"/> on a <paramref name="rb"/>.
+        /// </summary>
+        /// <param name="rb">Contextual <see cref="Rigidbody"/>.</param>
+        /// <param name="forcePos">Position of force in World space.</param>
+        /// <param name="force">Contextual force.</param>
+        /// <param name="forceMode">Mode of force.</param>
+        /// <returns></returns>
+        public static Vector3 CalculateTorqueFromForce(this Rigidbody rb, Vector3 forcePos, Vector3 force, ForceMode forceMode = ForceMode.Force) {
+            // convert to force if needed
+            if (forceMode == ForceMode.VelocityChange) force = force / Time.fixedDeltaTime * rb.mass;
+            else if (forceMode == ForceMode.Acceleration) force *= rb.mass;
+            else if (forceMode == ForceMode.Impulse) force /= Time.fixedDeltaTime;
+            
+            Vector3 leverArm = forcePos - rb.worldCenterOfMass;
+            Vector3 torque = Vector3.Cross(leverArm, force);
+
+            return torque;
+        }
+        
+        /// <summary>
         /// Predicts linear velocity of a <see cref="Rigidbody"/> on the next physics update 
         /// after application of accumulated forces, but before the collision and friction forces.
         /// <para>Intended to be used before internal physics update (on FixedUpdate).</para>
