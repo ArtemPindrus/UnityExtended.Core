@@ -144,6 +144,13 @@ namespace UnityExtended.Core.Extensions {
             return aligned;
         }
 
+        /// <summary>
+        /// Rotate <see cref="Vector3"/> around an axis for an angle.
+        /// </summary>
+        /// <param name="v">Rotated vector.</param>
+        /// <param name="axis">Axis of rotation.</param>
+        /// <param name="angle">Angle in degrees.</param>
+        /// <returns><paramref name="v"/> rotated around <paramref name="axis"/> for <paramref name="angle"/> degrees.</returns>
         public static Vector3 RotateAround(this Vector3 v, Vector3 axis, float angle) {
             Quaternion rotation = Quaternion.AngleAxis(angle, axis);
 
