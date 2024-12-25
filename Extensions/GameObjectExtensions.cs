@@ -7,6 +7,12 @@ namespace UnityExtended.Core.Extensions {
     /// Provides extensions to manage <see cref="GameObject"/>s.
     /// </summary>
     public static class GameObjectExtensions {
+        public static void SetActiveImmediateChildren(this GameObject parent, bool active) {
+            foreach (Transform child in parent.transform) {
+                child.gameObject.SetActive(active);
+            }
+        } 
+        
         /// <summary>
         /// Duplicates component onto another <see cref="GameObject"/>.
         /// <para>Uses reflection.</para>
