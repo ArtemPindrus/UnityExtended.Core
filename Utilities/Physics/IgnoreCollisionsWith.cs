@@ -1,4 +1,5 @@
 ﻿using System;
+using EditorAttributes;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -10,10 +11,12 @@ namespace UnityExtended.Core.External.UnityExtended.Core.Utilities.Physics {
     /// and other specified colliders on Awake.
     /// </summary>
     public class IgnoreCollisionsWith : MonoBehaviour {
+        [SerializeField] private bool showIgnoredColliders;
         [SerializeField]
         [Min(1)]
+        [ShowField(nameof(showIgnoredColliders))]
         private float sizeMultiplier = 1;
-        [SerializeField] private bool showIgnoredColliders = true;
+        
         [SerializeField] private Collider[] otherColliders;
         
         private Collider[] myColliders;
