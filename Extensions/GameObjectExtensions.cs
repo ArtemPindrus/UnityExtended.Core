@@ -49,7 +49,7 @@ namespace UnityExtended.Core.Extensions {
         /// <param name="gameObj"><see cref="GameObject"/> that contains all the children.</param>
         /// <param name="layer">Index of a layer in a layer mask (NOT A LAYER MASK ITSELF).</param>
         /// <param name="includeParent">Whether to set the layer of a <paramref name="gameObj"/>.</param>
-        public static void SetChildrenLayers(this GameObject gameObj, int layer, bool includeParent = true) {
+        public static void SetImmediateChildrenLayers(this GameObject gameObj, int layer, bool includeParent = true) {
             if (includeParent) gameObj.layer = layer;
 
             foreach (Transform child in gameObj.transform) {
