@@ -29,11 +29,6 @@ namespace UnityExtended.Core.External.UnityExtended.Core.Utilities.Physics {
                     UnityEngine.Physics.IgnoreCollision(myCollider, other);
                 }
             }
-            
-            // dispose of
-            otherColliders = null;
-            myColliders = null;
-            Destroy(this);
         }
 
         private void OnDrawGizmosSelected() {
