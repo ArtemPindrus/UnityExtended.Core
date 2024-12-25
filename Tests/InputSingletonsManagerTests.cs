@@ -8,15 +8,15 @@ using UnityExtended.Core.Types;
 
 namespace UnityExtended.Core.Tests {
     public class TestInputActionCollection : IInputActionCollection2, IDisposable {
-        public IEnumerable<InputBinding> bindings => throw new NotImplementedException();
+        public IEnumerable<InputBinding> bindings => throw new NotSupportedException();
 
-        public InputBinding? bindingMask { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public ReadOnlyArray<InputDevice>? devices { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public InputBinding? bindingMask { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+        public ReadOnlyArray<InputDevice>? devices { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
 
-        public ReadOnlyArray<InputControlScheme> controlSchemes => throw new NotImplementedException();
+        public ReadOnlyArray<InputControlScheme> controlSchemes => throw new NotSupportedException();
 
         public bool Contains(InputAction action) {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         public void Disable() {
@@ -29,19 +29,19 @@ namespace UnityExtended.Core.Tests {
         }
 
         public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false) {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         public int FindBinding(InputBinding mask, out InputAction action) {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         public IEnumerator<InputAction> GetEnumerator() {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         IEnumerator IEnumerable.GetEnumerator() {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
     }
 

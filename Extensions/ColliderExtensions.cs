@@ -9,7 +9,7 @@ namespace UnityExtended.Core.Extensions {
                 SphereCollider sphere => sphere.transform.position + sphere.center,
                 CapsuleCollider capsule => capsule.transform.position + capsule.center,
                 MeshCollider mesh => mesh.transform.position,
-                _ => throw new NotImplementedException()
+                _ => throw new NotSupportedException()
             };
         }
 

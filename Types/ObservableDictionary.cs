@@ -67,8 +67,6 @@ namespace UnityExtended.Core.Types {
 
         public bool TryGetValue(TKey key, out TValue value) => dictionary.TryGetValue(key, out value);
 
-
-
-        public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) => throw new NotImplementedException();
+        public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) => throw new NotSupportedException();
     }
 }
