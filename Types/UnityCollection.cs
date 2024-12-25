@@ -4,6 +4,10 @@ using UnityEngine;
 
 #nullable enable
 namespace UnityExtended.Core.Types {
+    /// <summary>
+    /// Collection of all <see cref="T"/> GameObjects in active scenes keyed by a criteria.
+    /// </summary>
+    /// <typeparam name="T">Type of GameObjects.</typeparam>
     public class UnityCollection<T> where T : Component {
         private readonly Dictionary<int,T> set;
         private readonly Func<T,int> itemToKey;
