@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityExtended.Core.Extensions;
 
 namespace UnityExtended.Core.Utilities {
@@ -8,6 +9,8 @@ namespace UnityExtended.Core.Utilities {
     }
     
     public class RadiusConstraint : MonoBehaviour {
+        [SerializeField] public bool DestroyCenterOnDestroy;
+        
         [field: SerializeField]
         public UpdateMode UpdateMode { get; set; }
         
@@ -112,6 +115,12 @@ namespace UnityExtended.Core.Utilities {
         private void OnValidate() {
             if (MinLimit > MaxLimit) {
                 (MinLimit, MaxLimit) = (MaxLimit, MinLimit);
+            }
+        }
+
+        private void OnDestroy() {
+            if (DestroyCenterOnDestroy) {
+                Destroy(Center.gameObject);
             }
         }
 
