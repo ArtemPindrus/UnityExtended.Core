@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using LitMotion;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -21,6 +22,16 @@ namespace UnityExtended.Core.Extensions {
             else source.Play();
 
             await UniTask.WaitForSeconds(source.clip.length + delta);
+        }
+
+        public static async UniTask TweenVolume(this AudioSource source,float from, float to, float duration) {
+            await LMotion.Create(from, to, duration)
+                .WithCancelOnError()
+                .Bind(source, (f, i) => source.volume = f);
+        }
+        
+        public static async UniTask TweenVolume(this AudioSource source, float to, float duration) {
+            await TweenVolume(source, source.volume, to, duration);
         }
     }
 }
