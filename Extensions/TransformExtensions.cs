@@ -14,5 +14,14 @@ namespace UnityExtended.Core.Extensions {
         public static void SetPositionOf(this Transform transform, Vector3 localPosition, Vector3 newPosition) {
             transform.position = newPosition - localPosition;
         }
+        #nullable  enable
+        public static IEnumerable<Transform> GetAllChildren(this Transform transform) {
+            foreach (Transform child in transform) {
+                yield return child;
+                foreach (var child2 in GetAllChildren(child)) {
+                    yield return child2;
+                }
+            }
+        }
     }
 }
