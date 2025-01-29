@@ -7,6 +7,16 @@ namespace UnityExtended.Core.Extensions {
     /// Provides extensions to manage <see cref="GameObject"/>s.
     /// </summary>
     public static class GameObjectExtensions {
+        public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component {
+            T component = null;
+            
+            if (!gameObject.TryGetComponent(out component)) {
+                component = gameObject.AddComponent<T>();
+            }
+
+            return component;
+        }
+        
         public static bool TryGetComponentInParent<T>(this GameObject gameObject, out T component) {
             component = gameObject.GetComponentInParent<T>();
 
