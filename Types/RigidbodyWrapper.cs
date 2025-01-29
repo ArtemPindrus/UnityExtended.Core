@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityExtended.Generator.Attributes;
+using UnityExtended.Generators.Attributes;
 
 namespace UnityExtended.Core.Types {
     [RequireComponent(typeof(Rigidbody))]
