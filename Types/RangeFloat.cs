@@ -1,27 +1,19 @@
 ﻿using System;
 using EditorAttributes;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityExtended.Core.Extensions;
 
-namespace UnityExtended.Core.Types
-{
-    [Serializable]
-    public class RangeFloat {
-        public bool logOnValueChangedErrors = true;
-        
-        [SerializeField]
-        [OnValueChanged(nameof(OnValueChanged))]
-        private float value, lowerLimit, upperLimit;
+namespace UnityExtended.Core.Types {
+    /// <summary>
+    /// Float with upper and lower limit that uses <see cref="MathExtensions.RangeOverflowExclusive"/> on overflows.
+    /// </summary>
+    public struct RangeFloat {
+        private float value;
 
-        public float LowerLimit {
-            get => lowerLimit;
-            private set => lowerLimit = value;
-        }
+        public float LowerLimit { get; private set; }
 
-        public float UpperLimit {
-            get => upperLimit;
-            private set => upperLimit = value;
-        }
+        public float UpperLimit { get; private set; }
 
         public float Value {
             get => value;
@@ -29,16 +21,23 @@ namespace UnityExtended.Core.Types
         }
 
         public RangeFloat(float lowerLimit, float upperLimit, float initialValue) {
+            ThrowIfLimitsAreInvalid(lowerLimit, upperLimit);
+
             LowerLimit = lowerLimit;
             UpperLimit = upperLimit;
+            value = 0;
+
             Value = initialValue;
         }
 
+        /// <summary>
+        /// Set limits.
+        /// </summary>
+        /// <param name="lower">Lower limit. Must be less then <paramref name="upper"/>.</param>
+        /// <param name="upper">Upper limit. Must be greater then <paramref name="lower"/>.</param>
         public void SetLimits(float lower, float upper) {
-            if (lower > upper) {
-                throw new ArgumentException($"{nameof(lower)} should be less than {nameof(upper)}.");
-            } else if (lower == upper) throw new Exception($"{nameof(lower)} and {nameof(upper)} shouldn't be equal.");
-            
+            ThrowIfLimitsAreInvalid(lower, upper);
+
             LowerLimit = lower;
             UpperLimit = upper;
 
@@ -54,24 +53,16 @@ namespace UnityExtended.Core.Types
             rf.Value -= f;
             return rf;
         }
-        
-        public static implicit operator float(RangeFloat rangeFloat) => rangeFloat.Value;
 
-        private void OnValueChanged() {
-#if UNITY_EDITOR
-            if (LowerLimit > UpperLimit) {
-                (UpperLimit, LowerLimit) = (LowerLimit, UpperLimit);
+        public static implicit operator float(RangeFloat rangeFloat) {
+            return rangeFloat.Value;
+        }
 
-                if (logOnValueChangedErrors) Debug.LogWarning("LowerLimit should be less than UpperLimit!");
-            } else if (LowerLimit == UpperLimit) {
-                LowerLimit = value - 1;
-                UpperLimit = value + 1;
-                
-                if (logOnValueChangedErrors) Debug.LogWarning("LowerLimit and UpperLimit should not equal!");
+        private static void ThrowIfLimitsAreInvalid(float lower, float upper) {
+            if (lower > upper) {
+                throw new ArgumentException($"{nameof(lower)} should be less than {nameof(upper)}.");
             }
-            
-            Value = value;
-#endif
+            else if (lower == upper) throw new ArgumentException($"{nameof(lower)} and {nameof(upper)} shouldn't be equal.");
         }
     }
 }
