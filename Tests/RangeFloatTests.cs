@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using UnityExtended.Core.Types;
 
 namespace UnityExtended.Core.Tests {
@@ -12,6 +13,16 @@ namespace UnityExtended.Core.Tests {
             rf += added;
 
             Assert.That(rf.Value, Is.EqualTo(expected));
+        }
+
+        [TestCase(-1, -1)]
+        [TestCase(0, 0)]
+        [TestCase(10, -10)]
+        [TestCase(float.MaxValue, float.MinValue)]
+        public void ThrowsOnInvalidLimits(float lower, float upper) {
+            Assert.Throws<ArgumentException>(() => {
+                _ = new RangeFloat(lower, upper, 0);
+            });
         }
     }
 }
