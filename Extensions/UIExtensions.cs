@@ -2,10 +2,17 @@
 using LitMotion;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 namespace UnityExtended.Core.Extensions {
     public static class UIExtensions {
+        public static void Add(this VisualElement visualElement, params VisualElement[] children) {
+            foreach (var child in children) {
+                visualElement.Add(child);
+            }
+        }
+        
         public static void SetAlpha(this Image image, float alpha) {
             Color currentColor = image.color;
             currentColor.a = alpha;
