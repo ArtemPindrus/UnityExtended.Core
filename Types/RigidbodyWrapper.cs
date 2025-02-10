@@ -8,8 +8,8 @@ namespace UnityExtended.Core.Types {
     [Collect]
     public partial class RigidbodyWrapper : MonoBehaviour {
         public Rigidbody Rigidbody { get; private set; }
-    
-        partial void PreAwake() {
+
+        partial void PreCollect() {
             Rigidbody = GetComponent<Rigidbody>();
         }
 
