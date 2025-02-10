@@ -1,9 +1,9 @@
 ﻿using System;
 
 namespace UnityExtended.Generators.Attributes {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class HandleInputAttribute : Attribute {
-        public HandleInputAttribute(Type inputActionsType) {
+        public HandleInputAttribute(params Type[] inputActionsType) {
         }
     }
 }
