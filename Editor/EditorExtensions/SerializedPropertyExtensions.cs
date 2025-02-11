@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnityEditor;
+using UnityEngine;
 
 #nullable  enable
 namespace UnityExtended.Core.Extensions {
@@ -27,6 +29,16 @@ namespace UnityExtended.Core.Extensions {
 
             return currentObject;
         }
-#nullable disable
+
+        public static IEnumerable<SerializedProperty> GetAllSerializedProperties(this SerializedObject serializedObject) {
+            using var serializedProperty = serializedObject.GetIterator();
+            using var endProperty = serializedProperty.Copy();
+            
+            bool enterChildren = true;
+            while (serializedProperty.NextVisible(enterChildren) && !SerializedProperty.EqualContents(serializedProperty, endProperty)) {
+                yield return serializedProperty;
+                enterChildren = false;
+            }
+        }
     }
 }
