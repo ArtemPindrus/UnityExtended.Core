@@ -32,12 +32,10 @@ namespace UnityExtended.Core.Extensions {
 
         public static IEnumerable<SerializedProperty> GetAllSerializedProperties(this SerializedObject serializedObject) {
             using var serializedProperty = serializedObject.GetIterator();
-            using var endProperty = serializedProperty.Copy();
+            serializedProperty.NextVisible(true);
             
-            bool enterChildren = true;
-            while (serializedProperty.NextVisible(enterChildren) && !SerializedProperty.EqualContents(serializedProperty, endProperty)) {
+            while (serializedProperty.NextVisible(false)) {
                 yield return serializedProperty;
-                enterChildren = false;
             }
         }
     }
