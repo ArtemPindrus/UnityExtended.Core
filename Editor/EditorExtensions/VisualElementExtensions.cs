@@ -1,21 +1,10 @@
 ﻿using UnityEditor;
 using UnityEditor.UIElements;
-using UnityEngine;
 using UnityEngine.UIElements;
+using UnityExtended.Core.Extensions;
 
-namespace UnityExtended.Core.Extensions {
+namespace UnityExtended.Core.EditorTools.Extensions {
     public static class VisualElementExtensions {
-        /// <summary>
-        /// Add a range of VisualElements at the end.
-        /// </summary>
-        /// <param name="visualElement">VisualElement to call add on.</param>
-        /// <param name="children">All the added VisualElements.</param>
-        public static void Add(this VisualElement visualElement, params VisualElement[] children) {
-            foreach (var child in children) {
-                visualElement.Add(child);
-            }
-        }
-
         /// <summary>
         /// Adds all <see cref="SerializedProperty"/>(s) of <paramref name="serializedObject"/> to <paramref name="container"/>.
         /// </summary>
