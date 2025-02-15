@@ -13,6 +13,12 @@ namespace UnityExtended.Core.Extensions {
             image.color = currentColor;
         }
 
+        public static async UniTask Blink(this Image image, float duration, float hold) {
+            await image.TweenAlpha(0, 1, duration);
+            await UniTask.WaitForSeconds(hold);
+            await image.TweenAlpha(1, 0, duration);
+        }
+
         public static async UniTask TweenAlpha(this Image image, float from, float to, float duration) {
             await LMotion.Create(from, to, duration)
                 .WithCancelOnError()
