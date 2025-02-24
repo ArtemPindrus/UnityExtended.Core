@@ -7,11 +7,16 @@ using UnityExtended.Core.Utilities.AudioSourceBetter;
 namespace External.UnityExtended.Core.Editor {
     public static class AssetDatabaseHelper {
         public static IEnumerable<T> LoadAllAssetsOfType<T>() where T : Object {
+            foreach (var p in GetPathsOfAssetsOfType<T>()) {
+                yield return AssetDatabase.LoadAssetAtPath<T>(p);
+            }
+        }
+
+        public static IEnumerable<string> GetPathsOfAssetsOfType<T>() where T : Object {
             var assets = AssetDatabase.FindAssets($"t:{typeof(T)}");
-            
+
             foreach (var e in assets) {
-                var assetPath = AssetDatabase.GUIDToAssetPath(e);
-                yield return AssetDatabase.LoadAssetAtPath<T>(assetPath);
+                yield return AssetDatabase.GUIDToAssetPath(e);
             }
         }
 
