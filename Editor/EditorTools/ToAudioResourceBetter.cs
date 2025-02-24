@@ -1,5 +1,7 @@
 using System;
+using System.IO;
 using System.Linq;
+using External.UnityExtended.Core.Editor;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
@@ -8,6 +10,7 @@ using UnityExtended.Core.Utilities.AudioSourceBetter;
 namespace UnityExtended.Core.EditorTools {
     public static class ToAudioResourceBetter {
         public const string MenuItemPath = "Assets/Extensions/Convert to AudioResourceBetter";
+        public const string AudioResourceBetterPath = "Assets/Resources/AudioResourceBetter/";
         
         public static bool CreateAudioResourceBetterAsset(AudioClip clip, [CanBeNull] out AudioResourceBetter audioResourceBetter) {
             if (clip == null) {
@@ -15,11 +18,9 @@ namespace UnityExtended.Core.EditorTools {
                 return false;
             }
 
-            string path = AssetDatabase.GetAssetPath(clip);
             AudioResourceBetter resourceBetter = clip;
-        
-            int dotIndex = path.LastIndexOf(".", StringComparison.Ordinal);
-            var assetPath = path.Substring(0, dotIndex) + ".asset";
+
+            var assetPath = $"{AudioResourceBetterPath}{clip.name}.asset";
 
             AudioResourceBetter existing = AssetDatabase.LoadAssetAtPath<AudioResourceBetter>(assetPath);
             if (existing != null) {
@@ -29,9 +30,7 @@ namespace UnityExtended.Core.EditorTools {
             }
             
             Debug.Log($"{assetPath} was created.");
-            AssetDatabase.CreateAsset(resourceBetter, assetPath);
-
-            audioResourceBetter = AssetDatabase.LoadAssetAtPath<AudioResourceBetter>(assetPath);
+            audioResourceBetter = AssetDatabaseHelper.CreateAndLoadAsset(resourceBetter, assetPath);
 
             return true;
         }
