@@ -22,5 +22,28 @@ namespace External.UnityExtended.Core.Editor {
             return asset;
         }
 
+        public static void MakeSureFolderExists(string relativePath) {
+            string[] pathParts = relativePath.Split('/');
+            string parentFolder = "Assets";
+
+            for (var i = 0; i < pathParts.Length; i++) {
+                var path = pathParts[i];
+                
+                if (i == 0 && path == "Assets") continue;
+                if (string.IsNullOrWhiteSpace(path)) continue;
+
+                string newFolderName = path;
+                string currentPath = Path.Combine(parentFolder, newFolderName);
+
+                if (!AssetDatabase.IsValidFolder(currentPath)) {
+                    AssetDatabase.CreateFolder(parentFolder, newFolderName);
+                    Debug.Log($"Created {currentPath}.");
+                }
+
+                parentFolder = currentPath;
+            }
+
+            AssetDatabase.CreateFolder(Path.GetDirectoryName(relativePath), relativePath);
+        }
     }
 }
