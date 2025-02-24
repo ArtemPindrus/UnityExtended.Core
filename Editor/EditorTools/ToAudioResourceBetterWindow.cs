@@ -9,7 +9,7 @@ using UnityExtended.Core.EditorTools;
 using UnityExtended.Core.Extensions;
 using Toggle = UnityEngine.UIElements.Toggle;
 
-public class ToAudioSourceBetterWindow : EditorWindow {
+public class ToAudioResourceBetterWindow : EditorWindow {
     private class Item {
         public readonly AudioClip AudioClip;
         public bool Operate;
@@ -24,12 +24,12 @@ public class ToAudioSourceBetterWindow : EditorWindow {
     private Foldout clipsFoldout;
 
     public static void Create() {
-        GetWindow<ToAudioSourceBetterWindow>();
+        GetWindow<ToAudioResourceBetterWindow>();
     }
     
     public static void Create(List<AudioClip> audioClips) {
         var clips = audioClips.Select(x => new Item(x)).ToList();
-        var window = GetWindow<ToAudioSourceBetterWindow>();
+        var window = GetWindow<ToAudioResourceBetterWindow>();
         window.audioClips.AddRange(clips);
 
         foreach (var t in clips) {
