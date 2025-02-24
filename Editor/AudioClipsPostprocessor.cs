@@ -7,9 +7,8 @@ public class AudioClipsPostprocessor : AssetPostprocessor {
         string[] movedFromAssetPaths) {
         var importedAudioClips = importedAssets
             .Select(AssetDatabase.LoadAssetAtPath<Object>)
-            .OfType<AudioClip>()
-            .ToList();
+            .OfType<AudioClip>();
 
-        if (importedAudioClips.Any()) ToAudioSourceBetterWindow.Create(importedAudioClips);
+        if (importedAudioClips.Any()) ToAudioResourceBetterWindow.Create(importedAudioClips.ToList());
     }
 }
