@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-namespace UnityExtended.Core.EditorTools {
+namespace UnityExtended.Core.Editor.EditorTools {
     public class SceneLoadTool : EditorWindow {
         private ObjectField sceneAssetField;
         private Button loadReferencedBtn;

@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace UnityExtended.Core.EditorTools {
+namespace UnityExtended.Core.Editor.EditorTools {
     public class DomainReload : EditorWindow {
         private Button reloadDomainBtn;
         private Label topLabel;

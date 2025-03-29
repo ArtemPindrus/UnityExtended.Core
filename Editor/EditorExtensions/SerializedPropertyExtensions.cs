@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
+﻿#nullable  enable
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
-using UnityEngine;
 
-#nullable  enable
-namespace UnityExtended.Core.Extensions {
+namespace UnityExtended.Core.Editor.EditorExtensions {
     public static class SerializedPropertyExtensions {
 #nullable  enable
         /// <summary>

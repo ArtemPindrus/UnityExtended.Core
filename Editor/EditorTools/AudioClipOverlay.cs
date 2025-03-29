@@ -1,16 +1,14 @@
 using System.Linq;
-using External.UnityExtended.Core.Editor;
 using UnityEditor;
 using UnityEditor.Overlays;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityExtended.Core.EditorTools;
 using UnityExtended.Core.Extensions;
 using UnityExtended.Core.Utilities.AudioSourceBetter;
 using ObjectField = UnityEditor.Search.ObjectField;
 
-namespace External.UnityExtended.Core.Editor {
+namespace UnityExtended.Core.Editor.EditorTools {
     [Overlay(typeof(SceneView), "AudioClip")]
     public class AudioClipOverlay : Overlay {
         private AudioClip currentClip;

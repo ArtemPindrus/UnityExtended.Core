@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-namespace UnityExtended.Core.EditorTools {
+namespace UnityExtended.Core.Editor.EditorTools {
     public class TimeScaleController : EditorWindow {
         private Slider timeScaleSlider;
         private Toggle toggle;

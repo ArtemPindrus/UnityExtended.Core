@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityExtended.Core.Utilities.AudioSourceBetter;
 
-namespace External.UnityExtended.Core.Editor {
+namespace UnityExtended.Core.Editor {
     public static class AssetDatabaseHelper {
         public static IEnumerable<T> LoadAllAssetsOfType<T>() where T : Object {
             foreach (var p in GetPathsOfAssetsOfType<T>()) {

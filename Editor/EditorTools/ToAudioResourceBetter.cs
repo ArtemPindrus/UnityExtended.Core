@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityExtended.Core.Utilities.AudioSourceBetter;
 
-namespace UnityExtended.Core.EditorTools {
+namespace UnityExtended.Core.Editor.EditorTools {
     public static class ToAudioResourceBetter {
         public const string MenuItemPath = "Assets/Extensions/Convert to AudioResourceBetter";
         public const string AudioResourceBetterPath = "Assets/Resources/AudioResourceBetter/";

@@ -1,4 +1,4 @@
-﻿namespace External.UnityExtended.Core.Editor {
+﻿namespace UnityExtended.Core.Editor {
     public class EditorHelper {
         
     }
