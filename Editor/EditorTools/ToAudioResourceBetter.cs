@@ -1,7 +1,4 @@
-using System;
-using System.IO;
 using System.Linq;
-using External.UnityExtended.Core.Editor;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
