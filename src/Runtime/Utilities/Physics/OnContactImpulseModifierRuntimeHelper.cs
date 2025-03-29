@@ -1,6 +1,6 @@
-﻿using EditorAttributes;
-using System;
+﻿using System;
 using UnityEngine;
+using UnityExtended.Core.Attributes;
 using UnityExtended.Core.Types;
 
 namespace UnityExtended.Core.Utilities {
@@ -22,9 +22,6 @@ namespace UnityExtended.Core.Utilities {
             this.affectedIDs = affectedIDs;
         }
 
-        [HelpBox("Use Add/Remove Buttons to add/remove Rigidbody above (Rb) to the list of affected Rigidbodies.")]
-        private EditorAttributes.Void helpBox;
-
         [Button]
         private void Add() {
             if (rb == null) return;
@@ -33,7 +30,7 @@ namespace UnityExtended.Core.Utilities {
             rb = null;
         }
 
-        [Button(nameof(Remove))]
+        [Button]
         private void Remove() {
             if (rb == null) return;
 

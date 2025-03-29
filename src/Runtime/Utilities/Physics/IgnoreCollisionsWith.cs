@@ -1,8 +1,4 @@
-﻿using System;
-using EditorAttributes;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 using UnityExtended.Core.Extensions;
 
 namespace UnityExtended.Core.External.UnityExtended.Core.Utilities.Physics {
@@ -14,7 +10,6 @@ namespace UnityExtended.Core.External.UnityExtended.Core.Utilities.Physics {
         [SerializeField] private bool showIgnoredColliders;
         [SerializeField]
         [Min(1)]
-        [ShowField(nameof(showIgnoredColliders))]
         private float sizeMultiplier = 1;
         
         [SerializeField] private Collider[] otherColliders;

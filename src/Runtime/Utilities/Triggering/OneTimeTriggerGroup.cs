@@ -1,6 +1,5 @@
-using System;
-using EditorAttributes;
 using UnityEngine;
+using UnityExtended.Core.Attributes;
 
 namespace UnityExtended.Core.Utilities.Triggering {
     public class OneTimeTriggerGroup : MonoBehaviour {

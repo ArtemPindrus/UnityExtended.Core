@@ -1,0 +1,15 @@
+{
+    "name" : "com.artempindrus.unityextended.core",
+    "displayName" : "UnityExtended.Core",
+    "version" : "0.1.0",
+    "unity" : "6000.0.43f1",
+    "license" : "Refer to LICENSE.md file in repository",
+    "licensesUrl" : "https://github.com/ArtemPindrus/UnityExtended.Core/blob/main/LICENSE",
+    "author" : {
+        "name": "Artem Pindrus"
+    },
+    "dependencies" : {
+        "com.cysharp.unitask" : "2.5.10",
+        "com.unity.inputsystem" : "1.13.1"
+    }
+}

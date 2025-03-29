@@ -1,7 +1,4 @@
 ﻿using System;
-using EditorAttributes;
-using JetBrains.Annotations;
-using UnityEngine;
 using UnityExtended.Core.Extensions;
 
 namespace UnityExtended.Core.Types {

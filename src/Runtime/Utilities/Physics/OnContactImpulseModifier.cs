@@ -1,10 +1,10 @@
-﻿using EditorAttributes;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections;
 using UnityEngine;
 using UnityExtended.Core.Types;
 
+// TODO: revise 
 namespace UnityExtended.Core.Utilities {
     /// <summary>
     /// Scales inverse mass and inertia when interacting with specified Rigidbodies.
@@ -23,16 +23,16 @@ namespace UnityExtended.Core.Utilities {
         [Tooltip("A list of Rigidbodies interaction with which is modified.\n" +
                  "This list isn't modifiable in Inspector during Runtime.\n" +
                  "To add items during Runtime either use public " + nameof(Include) + " method through other scripts or use Runtime Helper in this script to add items through Editor's inspector.")]
-        [DisableInPlayMode]
+        //[DisableInPlayMode]
         [SerializeField]
         private List<Rigidbody> affectedRigidbodies;
 
         [SerializeField]
-        [DisableInEditMode]
+        //[DisableInEditMode]
         private OnContactImpulseModifierRuntimeHelper runtimeInspectorHelper;
 
-        [HelpBox("Remember that setting the inverse mass/inertia scales to values < 1 makes the objects appear heavier, while setting them to values > 1 makes objects appear lighter.\n" +
-                 "HINT: VelocityDelta = impulse / mass OR impulse * inverseMass. (so the less the inverseMass the less the resulting VelocityDelta)")]
+        // [HelpBox("Remember that setting the inverse mass/inertia scales to values < 1 makes the objects appear heavier, while setting them to values > 1 makes objects appear lighter.\n" +
+        //          "HINT: VelocityDelta = impulse / mass OR impulse * inverseMass. (so the less the inverseMass the less the resulting VelocityDelta)")]
         [Tooltip("When interacting with Affected Rigidbodies what's the inverse mass scale of THIS body (the body with the script attached).")]
         [SerializeField]
         [Min(0)]

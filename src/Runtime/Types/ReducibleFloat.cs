@@ -1,5 +1,4 @@
-﻿using EditorAttributes;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace UnityExtended.Core.Types {
