@@ -7,6 +7,7 @@ using UnityExtended.Core.External.UnityExtended.Core.Helpers;
 using UnityExtended.Generators.Attributes;
 using VisualElementExtensions = UnityExtended.Core.Editor.EditorExtensions.VisualElementExtensions;
 
+#nullable enable
 namespace UnityExtended.Core.Editor.Drawers {
     public static class DisplayDrawer {
         /// <summary>
@@ -35,8 +36,12 @@ namespace UnityExtended.Core.Editor.Drawers {
             var fieldName = ReflectionHelper.BeautifyBackingFieldName(field.Name);
             if (!VisualElementExtensions.DrawParameterField(field.FieldType, fieldName, out var fieldVisualElement)
                 && field.FieldType.GetCustomAttribute<DisplayItemAttribute>() is {} displayItemAttribute) {
-                fieldVisualElement = CreateVisualElementForDisplayItem(field.GetValue(target), displayItemAttribute, fieldName);
+                fieldVisualElement = CreateVisualElementForDisplayItem(displayItemAttribute, fieldName, out var updateMethod, out var bagInstance);
                 fieldVisualElement.enabledSelf = false;
+
+                fieldVisualElement.schedule.Execute(() => {
+                    updateMethod.Invoke(bagInstance, new[] { field.GetValue(target) });
+                }).Every(50);
                 
                 return fieldVisualElement;
             }
@@ -54,21 +59,6 @@ namespace UnityExtended.Core.Editor.Drawers {
         }
 
         /// <summary>
-        /// <see cref="CreateVisualElementForDisplayItem(object,string)"/>
-        /// </summary>
-        /// <param name="target">Instance of a type decorated with <see cref="DisplayItemAttribute"/>.</param>
-        /// <param name="name">Name of a returned control.</param>
-        /// <returns><see cref="VisualElement"/> created using <see cref="IDisplayBag{T}.CreateVisualElement"/>.</returns>
-        public static VisualElement CreateVisualElementForDisplayItem(object target, string name) {
-            if (target == null) return CreateEmptyDisplayItem(name);
-            
-            if (target.GetType().GetCustomAttribute<DisplayItemAttribute>() is { } displayItemAttribute) {
-                return CreateVisualElementForDisplayItem(target, displayItemAttribute, name);
-            }
-            else return new VisualElement();
-        }
-
-        /// <summary>
         /// Creates <see cref="VisualElement"/> for an instance of a type that is decorated with <see cref="DisplayItemAttribute"/> and provides valid <see cref="IDisplayBag{T}"/>.
         /// </summary>
         /// <param name="target">Instance of a type decorated with <see cref="DisplayItemAttribute"/>.</param>
@@ -76,21 +66,18 @@ namespace UnityExtended.Core.Editor.Drawers {
         /// <param name="name">Name of a returned control.</param>
         /// <returns><see cref="VisualElement"/> created using <see cref="IDisplayBag{T}.CreateVisualElement"/>.</returns>
         /// <exception cref="Exception">Didn't find a CreateVisualElement method on a type specified in <paramref name="displayItemAttribute"/>.</exception>
-        public static VisualElement CreateVisualElementForDisplayItem(object target, DisplayItemAttribute displayItemAttribute, string name) {
-            if (target == null) return CreateEmptyDisplayItem(name);
-            
-            var instance = Activator.CreateInstance(displayItemAttribute.DisplayBagType);
-            var createVisualElementMethod = instance.GetType().GetMethod("CreateVisualElement");
+        public static VisualElement CreateVisualElementForDisplayItem(DisplayItemAttribute displayItemAttribute, string name, out MethodInfo updateMethod, out object bagInstance) {
+            bagInstance = Activator.CreateInstance(displayItemAttribute.DisplayBagType);
+            var type = bagInstance.GetType();
+            var createVisualElementMethod = type.GetMethod("CreateVisualElement");
+            updateMethod = type.GetMethod("Update");
 
-            if (createVisualElementMethod == null) throw new Exception(); // TODO: handle;
+            if (createVisualElementMethod == null || updateMethod == null) throw new Exception(); // TODO: handle;
 
-            var ve = (VisualElement)createVisualElementMethod.Invoke(instance, new[] {target, name});
+            var ve = (VisualElement)createVisualElementMethod.Invoke(bagInstance, new object[] {name});
             ve.name = name;
+            
             return ve;
-        }
-
-        private static VisualElement CreateEmptyDisplayItem(string name) {
-            return new Label($"Display item \"{name}\" is not initialized");
         }
     }
 }

@@ -2,6 +2,7 @@
 using UnityEngine.UIElements;
 using UnityExtended.Generators.Attributes;
 
+#nullable enable
 namespace UnityExtended.Generators.Attributes {
     /// <summary>
     /// Use to define how a custom type should be displayed without serialization.
@@ -23,13 +24,14 @@ namespace UnityExtended.Generators.Attributes {
     /// Describes how T should be displayed without serialization.
     /// </summary>
     /// <typeparam name="T">Type that should be displayed.</typeparam>
-    public interface IDisplayBag<in T> {
+    public interface IDisplayBag<T> {
         /// <summary>
-        /// Created visual representation of <paramref name="data"/>.
+        /// Created visual representation for data.
         /// </summary>
-        /// <param name="data">Input.</param>
         /// <param name="name">Name of the control.</param>
         /// <returns></returns>
-        public VisualElement CreateVisualElement(T data, string name);
+        public VisualElement CreateVisualElement(string name);
+
+        public void Update(T? data);
     }
 }
