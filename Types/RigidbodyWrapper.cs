@@ -8,11 +8,11 @@ namespace UnityExtended.Core.Types {
     [Collect]
     public partial class RigidbodyWrapper : MonoBehaviour {
         public Rigidbody Rigidbody { get; private set; }
-
-        partial void PreCollect() {
+        
+        private void Awake() {
             Rigidbody = GetComponent<Rigidbody>();
         }
 
-        public override int GetHashCode() => Rigidbody.GetInstanceID();
+        public override int GetHashCode() => Rigidbody.GetHashCode();
     }
 }
