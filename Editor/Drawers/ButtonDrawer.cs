@@ -1,16 +1,19 @@
 #nullable enable
-using System;
 using System.Linq;
 using System.Reflection;
-using UnityEditor.UIElements;
+using UnityExtended.Core.Editor.EditorExtensions;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityExtended.Core.Extensions;
 using UnityExtended.Core.Attributes;
-using Object = UnityEngine.Object;
+using UnityExtended.Core.Extensions;
+using UnityExtended.Core.External.UnityExtended.Core.Helpers;
 
-namespace UnityExtended.Core.Drawers {
+namespace UnityExtended.Core.Editor.Drawers {
 	public static class ButtonDrawer {
+		public static void FillIn(VisualElement container, object target) {
+			container.Add(DrawButtons(target));
+		}
+		
 		public static VisualElement DrawButtons(object target) {
 			var root = new VisualElement();
 			var methods = target.GetType().GetMethods();
@@ -26,7 +29,7 @@ namespace UnityExtended.Core.Drawers {
 		
 		public static VisualElement CreateButton(MethodInfo method, object target) {
 			VisualElement root = new();
-			root.style.backgroundColor = new StyleColor(Color.gray);
+			root.style.backgroundColor = ColorHelper.From255RGBA(53);
 
 			var paramsFoldout = new Foldout() {
 				text = "Parameters:"
@@ -37,7 +40,7 @@ namespace UnityExtended.Core.Drawers {
 			foreach (var parameterInfo in parameters) {
 				var parameterType = parameterInfo.ParameterType;
 
-				var parameterField = Extensions.VisualElementExtensions.DrawParameterField(parameterType, parameterInfo.Name);
+				EditorExtensions.VisualElementExtensions.DrawParameterField(parameterType, parameterInfo.Name, out var parameterField);
 				paramsFoldout.Add(parameterField);
 			}
 
