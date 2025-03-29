@@ -50,7 +50,8 @@ namespace UnityExtended.Core.Editor.Drawers {
 				text = buttonLabel
 			};
         
-			root.Add(button, paramsFoldout);
+			root.Add(button);
+			if (paramsFoldout.childCount > 0) root.Add(paramsFoldout);
 
 			return root;
 		}
