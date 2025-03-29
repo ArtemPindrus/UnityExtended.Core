@@ -20,15 +20,16 @@ namespace UnityExtended.Core.Editor.Drawers {
 			var methods = target.GetType().GetMethods();
 
 			foreach (var method in methods) {
-				if (method.GetCustomAttribute<ButtonAttribute>() is not null) {
-					root.Add(CreateButton(method, target));
+				if (method.GetCustomAttribute<ButtonAttribute>() is { } buttonAttribute) {
+					var buttonLabel = buttonAttribute.CustomButtonLabel ?? method.Name;
+					root.Add(CreateButton(method, target, buttonLabel));
 				}
 			}
 
 			return root;
 		}
 		
-		public static VisualElement CreateButton(MethodInfo method, object target) {
+		public static VisualElement CreateButton(MethodInfo method, object target, string buttonLabel) {
 			VisualElement root = new();
 			root.style.backgroundColor = ColorHelper.From255RGBA(53);
 
@@ -46,7 +47,7 @@ namespace UnityExtended.Core.Editor.Drawers {
 			}
 
 			Button button = new(() => method.Invoke(target, paramsFoldout.Children().Select(x => x.GetValue()).ToArray())) {
-				text = method.Name
+				text = buttonLabel
 			};
         
 			root.Add(button, paramsFoldout);
