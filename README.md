@@ -22,3 +22,4 @@ Some parts of package are optional and are installed separately.
 # Installation
 Install package from Git URL:
 https://github.com/ArtemPindrus/UnityExtended.Core.git?path=src
+Install all dependencies.
