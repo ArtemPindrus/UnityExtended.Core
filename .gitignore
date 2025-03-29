@@ -1,3 +1,4 @@
 **.meta
 
+!src/**/**.meta
 !UnityExtended.Generator.dll.meta
