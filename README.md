@@ -7,7 +7,7 @@ Use it for anything. Commercial use as well. No credits required.
 The code is thoroughly documented. If you wonder what any method or utility does - just read the summary on the definition.
 
 # Dependencies
-- [EditorAttributes](https://github.com/v0lt13/EditorAttributes) (yet to be removed)
+- [LitMotion](https://github.com/AnnulusGames/LitMotion)
 - [UniTask](https://github.com/Cysharp/UniTask) - async stuff
 - Unity.InputSystem
 
