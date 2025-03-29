@@ -7,9 +7,13 @@ Use it for anything. Commercial use as well. No credits required.
 The code is thoroughly documented. If you wonder what any method or utility does - just read the summary on the definition.
 
 # Dependencies
-- [LitMotion](https://github.com/AnnulusGames/LitMotion)
+**Required:**
 - [UniTask](https://github.com/Cysharp/UniTask) - async stuff
 - Unity.InputSystem
+
+**Optional:**
+- [LitMotion](https://github.com/AnnulusGames/LitMotion):
+Used in some extensions. Define ```UNITYEXTENDED_USE_LITMOTION``` and ```LITMOTION_SUPPORT_UNITASK``` Scripting Define Symbols in Player settings to support it.
 
 # Supported versions:
 - Unity 6+
@@ -20,6 +24,5 @@ Some parts of package are optional and are installed separately.
 - [UnityExtended.AI](https://github.com/ArtemPindrus/UnityExtended.AI/tree/main)
 
 # Installation
-Install package from Git URL:
-https://github.com/ArtemPindrus/UnityExtended.Core.git?path=src
-Install all dependencies.
+- Install package from Git URL: https://github.com/ArtemPindrus/UnityExtended.Core.git?path=src
+- Install dependencies.
