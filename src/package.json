@@ -2,7 +2,7 @@
     "name" : "com.artempindrus.unityextended.core",
     "displayName" : "UnityExtended.Core",
     "version" : "0.1.0",
-    "unity" : "6000.0.43f1",
+    "unity" : "6000.0",
     "license" : "Refer to LICENSE.md file in repository",
     "licensesUrl" : "https://github.com/ArtemPindrus/UnityExtended.Core/blob/main/LICENSE",
     "author" : {
