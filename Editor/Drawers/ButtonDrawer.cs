@@ -17,7 +17,9 @@ namespace UnityExtended.Core.Editor.Drawers {
 		
 		public static VisualElement DrawButtons(object target) {
 			var root = new VisualElement();
-			var methods = target.GetType().GetMethods();
+			var methods = target.GetType().GetMethods(BindingFlags.Public 
+			                                          | BindingFlags.NonPublic 
+			                                          | BindingFlags.Instance);
 
 			foreach (var method in methods) {
 				if (method.GetCustomAttribute<ButtonAttribute>() is { } buttonAttribute) {
