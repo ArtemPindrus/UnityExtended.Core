@@ -20,5 +20,5 @@ Some parts of package are optional and are installed separately.
 - [UnityExtended.AI](https://github.com/ArtemPindrus/UnityExtended.AI/tree/main)
 
 # Installation
-- Install all the [Dependencies](#dependencies).
-- Clone repository into desired folder inside Assets folder of your project. (the same applies for modules)
+Install package from Git URL:
+https://github.com/ArtemPindrus/UnityExtended.Core.git?path=src
