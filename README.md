@@ -10,7 +10,6 @@ The code is thoroughly documented. If you wonder what any method or utility does
 - [EditorAttributes](https://github.com/v0lt13/EditorAttributes) (yet to be removed)
 - [UniTask](https://github.com/Cysharp/UniTask) - async stuff
 - Unity.InputSystem
-- Unity.TextMeshPro
 
 # Supported versions:
 - Unity 6+
