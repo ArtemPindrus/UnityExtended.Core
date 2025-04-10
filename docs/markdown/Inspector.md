@@ -3,7 +3,7 @@ You can use inspector features by:
 - Utilizing Drawers within UnityExtended.Core.Editor.Drawers on custom inspectors.
 - Decorating MonoBehaviour with CreateCustomInspectorAttribute described below.
 
-## [CreateCustomInspectorAttribute](https://github.com/ArtemPindrus/UnityExtended.Core/blob/main/Generators/Attributes/CreateCustomInspectorAttribute.cs)
+## [CreateCustomInspectorAttribute](/src/Runtime/Generators/Attributes/CreateCustomInspectorAttribute.cs)
 Decorate a MonoBehavior with this attribute to instruct source generator to create a custom inspector for this type with all the provided features used.
 
 **Naming:**
