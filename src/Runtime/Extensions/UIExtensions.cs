@@ -1,9 +1,12 @@
 ﻿using Cysharp.Threading.Tasks;
-using LitMotion;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
+
+#if UNITYEXTENDED_USE_LITMOTION
+using LitMotion;
+#endif
 
 namespace UnityExtended.Core.Extensions {
     public static class UIExtensions {
@@ -13,6 +16,7 @@ namespace UnityExtended.Core.Extensions {
             image.color = currentColor;
         }
 
+#if UNITYEXTENDED_USE_LITMOTION
         public static async UniTask Blink(this Image image, float duration, float hold) {
             await image.TweenAlpha(0, 1, duration);
             await UniTask.WaitForSeconds(hold);
@@ -30,5 +34,6 @@ namespace UnityExtended.Core.Extensions {
                 .WithCancelOnError()
                 .Bind(text, (f, i) => text.alpha = f);
         }
+#endif
     }
 }
