@@ -67,7 +67,7 @@ partial class SomeClassInspector : UnityEditor.Editor{
 
 Inspector:
 
-![](docs/images/CreateCustomInspectorDemo.png)
-![](docs/images/CreateCustomInspectorDemo2.png)
+![CreateCustomInspectorDemo](/docs/images/CreateCustomInspectorDemo.png)
+![](/docs/images/CreateCustomInspectorDemo2.png)
 
 Without CreateCustomInspector all the inspector features (Display, Button, etc.) will not work (unless you define your own custom inspector that uses Drawers).
