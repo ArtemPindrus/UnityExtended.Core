@@ -13,8 +13,7 @@ For Namespace.MyClass generates Namespace.MyClassInspector
 Created partial class that inherits UnityEditor.Editor and overrides CreateInspectorGUI method.
 
 **Provides partial methods:**
-- partial void Update2(); Define to execute statements on root's schedule every x milliseconds.
-- partial void PreRearrange(ref VisualElement root); Define to modify root before elements get rearranged by [SetVisualElementAtDrawer](https://github.com/ArtemPindrus/UnityExtended.Core/blob/main/Editor/Drawers/SetVisualElementAtDrawer.cs)
+- partial void PreRearrange(VisualElement root); Define to modify root before elements get rearranged by [SetVisualElementAtDrawer](https://github.com/ArtemPindrus/UnityExtended.Core/blob/main/Editor/Drawers/SetVisualElementAtDrawer.cs)
 - partial void ModifyRoot(ref VisualElement root); Define to modify root after all the other operations. Root is guaranteed to NOT be modified by generator provided partial definition after this method.
 
 ### Example
@@ -42,49 +41,33 @@ partial class SomeClassInspector : UnityEditor.Editor{
     private SomeClass targetCasted;
 
     public override VisualElement CreateInspectorGUI() {
-        // Reservation Main
         targetCasted = (SomeClass)target;
         var root = new VisualElement();
 
         InspectorElement.FillDefaultInspector(root, serializedObject, this);
 
-        // Reservation CustomInspectorMainRes
         DisplayDrawer.FillInFor(root, target);
         ButtonDrawer.FillIn(root, target);
 
-        PreRearrange(ref root);
+        PreRearrange(root);
         SetVisualElementAtDrawer.Rearrange(root, target);
 
-        // Reservation FinishRes
         root.schedule.Execute(Update).Every(50);
 
-        ModifyRoot(ref root); // modify before returning;
+        ModifyRoot(ref root);
 
         return root;
     }
 
-    private void Update() {
-        // Reservation Main
-        if (!Application.isPlaying) return;
-
-
-        // Reservation CustomInspectorMainRes
-
-        // Reservation FinishRes
-         Update2();
-    }
-
     partial void ModifyRoot(ref VisualElement root);
 
-    partial void Update2();
-
-    partial void PreRearrange(ref VisualElement root);
+    partial void PreRearrange(VisualElement root);
 }
 ```
 
 Inspector:
 
-![](docs/CreateCustomInspectorDemo.png)
-![](docs/CreateCustomInspectorDemo2.png)
+![](docs/images/CreateCustomInspectorDemo.png)
+![](docs/images/CreateCustomInspectorDemo2.png)
 
 Without CreateCustomInspector all the inspector features (Display, Button, etc.) will not work (unless you define your own custom inspector that uses Drawers).
