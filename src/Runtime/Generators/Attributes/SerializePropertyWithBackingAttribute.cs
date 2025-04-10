@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UnityExtended.Generators.Attributes {
+namespace UnityExtended.Core.Generators.Attributes {
     [AttributeUsage(AttributeTargets.Property)]
     public class SerializePropertyWithBackingAttribute : Attribute {
         

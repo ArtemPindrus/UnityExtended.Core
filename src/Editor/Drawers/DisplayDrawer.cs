@@ -4,7 +4,7 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityExtended.Core.External.UnityExtended.Core.Helpers;
-using UnityExtended.Generators.Attributes;
+using UnityExtended.Core.Generators.Attributes;
 using VisualElementExtensions = UnityExtended.Core.Editor.EditorExtensions.VisualElementExtensions;
 
 #nullable enable

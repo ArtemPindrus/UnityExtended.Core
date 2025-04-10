@@ -1,4 +1,4 @@
-﻿namespace UnityExtended.Generators.Attributes {
+﻿namespace UnityExtended.Core.Generators.Attributes {
     public enum In {
         Self,
         Children,

@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityExtended.Generators.Attributes;
+using UnityExtended.Core.Generators.Attributes;
 using Object = UnityEngine.Object;
 
 #nullable enable

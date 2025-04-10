@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine.UIElements;
-using UnityExtended.Generators.Attributes;
+using UnityExtended.Core.Generators.Attributes;
 
 #nullable enable
-namespace UnityExtended.Generators.Attributes {
+namespace UnityExtended.Core.Generators.Attributes {
     /// <summary>
     /// Use to define how a custom type should be displayed without serialization.
     /// </summary>
