@@ -6,6 +6,10 @@ Use it for anything. Commercial use as well. No credits required.
 
 The code is thoroughly documented. If you wonder what any method or utility does - just read the summary on the definition.
 
+# Docs
+- [Source Generator Marker Attributes](https://github.com/ArtemPindrus/UnityExtended.Generators/blob/main/README.md#attributes)
+- [Inspector Features](/docs/markdown/Inspector.md)
+
 # Dependencies
 **Required:**
 - [UniTask](https://github.com/Cysharp/UniTask) - async stuff
